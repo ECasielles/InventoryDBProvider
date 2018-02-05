@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Inventory</string>
+    <string name="txvSignIn">Sign In</string>
+    <string name="txvSignUp">Sign Up</string>
+    <string name="btnSignIn">Sign In</string>
+    <string name="btnGoogleSignIn">Google</string>
+    <string name="btnFacebookSignIn">Log in with Facebook</string>
+    <string name="txvPassword">Password</string>
+    <string name="txvUser">Username or email</string>
+    <string name="chkRemember">Remember username</string>
+    <string name="btnStatus">Change status</string>
+
+    <string name="txvCreationDate">Creation date</string>
+    <string name="txvName">Name</string>
+    <string name="txvSerial">Serial number</string>
+    <string name="txvVendor">Vendor</string>
+    <string name="txvModelCode">Model</string>
+    <string name="txvCategory">Category</string>
+    <string name="txvSectorName">Subcategory</string>
+    <string name="txvType">Type</string>
+    <string name="txvDescription">Descrition</string>
+    <string name="txvPrice">Price</string>
+    <string name="txvAcquisitionDate">Acq. date</string>
+    <string name="txvProductInfoURL">URL</string>
+    <string name="txvNotes">Notes</string>
+    <string name="txvPeripheral">Peripheral</string>
+    <string name="errorUserEmpty">User empty</string>
+    <string name="errorEmailEmpty">Email empty</string>
+    <string name="errorPasswordEmpty">Password empty</string>
+    <string name="errorPassword">Invalid password</string>
+    <string name="errorEmailFormat">Invalid email format</string>
+    <string name="errorShortname">Invalid shortname</string>
+    <string name="errorDescription">Invalid description</string>
+    <string name="errorDependencyDuplicate">Duplicated</string>
+    <string name="errorName">Invalid name</string>
+    <string name="errorDependencyNameEmptyError">Error: Empty name</string>
+    <string name="errorDependencyShortNameEmptyError">Error: Empty shortname</string>
+    <string name="errorDependencyShortNameLengthError">"Error: Invalid length "</string>
+    <string name="errorDependencyDescriptionEmptyError">Error: Empty dependency</string>
+    <string name="error_db_not_found">Element not found</string>
+</resources>

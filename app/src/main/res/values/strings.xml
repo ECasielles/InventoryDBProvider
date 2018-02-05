@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Inventory</string>
+    <string name="txvSignIn">Acceder</string>
+    <string name="txvSignUp">Registro</string>
+    <string name="btnSignIn">Acceder</string>
+    <string name="btnGoogleSignIn">Google</string>
+    <string name="btnFacebookSignIn">Acceder con Facebook</string>
+    <string name="txvPassword">Contraseña</string>
+    <string name="txvUser">Nombre usuario o email</string>
+    <string name="chkRemember">Recordar usuario</string>
+    <string name="btnStatus">Cambiar estadoChange status</string>
+    <string name="logo" translatable="false">Logo</string>
+    <string name="txvCreationDate">Fecha de creación</string>
+    <string name="txvName">Nombre</string>
+    <string name="txvSerial">Serial</string>
+    <string name="txvVendor">Vendedor</string>
+    <string name="txvModelCode">Modelo</string>
+    <string name="txvCategory">Categoría</string>
+    <string name="txvSectorName">Sector</string>
+    <string name="txvType">Tipo</string>
+    <string name="txvDescription">Descripción</string>
+    <string name="txvPrice">Precio</string>
+    <string name="txvAcquisitionDate">F. compra</string>
+    <string name="txvProductInfoURL">URL</string>
+    <string name="txvNotes">Notas</string>
+    <string name="txvPeripheral">Periférico</string>
+    <string name="txvId" translatable="false">Id</string>
+    <string name="txvSectorDefault" translatable="false">Default</string>
+    <string name="action_save" translatable="false">Guardar</string>
+
+    <!--ACCIONES APPBAR-TOOLBAR-FLOATING BUTTON-->
+    <string name="action_general_settings" translatable="false">Ajustes generales</string>
+    <string name="action_account_settings" translatable="false">Ajustes de cuenta</string>
+    <string name="pref_password_default" translatable="false" />
+    <string name="pref_password_title" translatable="false">Contraseña</string>
+
+    <string name="edtName" translatable="false">Escriba el nombre</string>
+    <string name="edtShortName" translatable="false">Escriba el nombre corto</string>
+    <string name="edtDescription" translatable="false">Escriba una descripción</string>
+    <string name="addEditDependencyFragment" translatable="false">Editar dependencia</string>
+    <string name="listDependencyFragmentContextTitle" translatable="false">Opciones Lista Dependencia</string>
+
+    <!--MENU-->
+    <string name="fragment_listdependency_delete" translatable="false">Eliminar dependencia</string>
+    <string name="btnOk" translatable="false">Confirmar</string>
+    <string name="btnCancel" translatable="false">Cancelar</string>
+    <string name="dependency_deleted" translatable="false">Dependencia eliminada</string>
+    <string name="error_db_not_found">No se ha encontrador el elemento</string>
+
+
+</resources>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.usuario.inventorydbprovider.ui.inventory.InventoryActivity"
+    android:stretchColumns="1"
+    android:id="@+id/android.R.id.content"
+    >
+
+    <TableRow>
+        <TextView
+            android:id="@+id/txvName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/txvName"
+            />
+        <EditText
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/edtName"
+            android:inputType="text"
+            />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:id="@+id/txvDescription"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/txvDescription"
+            />
+        <EditText
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/edtDescription"
+            android:inputType="text"
+            />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:id="@+id/txvCreationDate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/txvCreationDate"
+            />
+        <EditText
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/edtCreationDate"
+            android:inputType="date"
+            />
+    </TableRow>
+
+
+    <TableRow>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnStatus"
+            android:text="@string/btnStatus"
+            android:layout_span="2"
+            android:layout_gravity="center"
+            />
+    </TableRow>
+
+</TableLayout>

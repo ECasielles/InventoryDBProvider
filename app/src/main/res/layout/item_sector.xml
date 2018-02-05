@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+    <Switch
+        android:id="@+id/swtSector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:checked="true"
+        app:layout_constraintBottom_toBottomOf="@+id/txvSectorName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txvSectorName"
+        />
+
+    <TextView
+        android:id="@+id/txvSectorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:textColor="@android:color/primary_text_light"
+        android:textSize="@dimen/list_primary_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/swtSector"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Name"
+        />
+
+    <TextView
+        android:id="@+id/txvSectorDefault"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/secondary_text_light"
+        android:textSize="@dimen/list_secondary_text"
+        app:layout_constraintStart_toStartOf="@+id/txvSectorName"
+        app:layout_constraintTop_toBottomOf="@+id/txvSectorName"
+        tools:text="Default"
+        />
+
+</android.support.constraint.ConstraintLayout>

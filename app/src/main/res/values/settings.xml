@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Guarda todas las cadenas de las preferencias
+    Luego se accede a ellos de forma normal-->
+<resources>
+    <string name="pref_category_general" translatable="false">Preferencias generales</string>
+    <string name="pref_title_showimage" translatable="false">Mostrar imagen</string>
+
+    <string name="pref_description_showimage" translatable="false">Mostrar las imágenes en los listados de la aplicación</string>
+    <string name="pref_description_showimage_off" translatable="false">No mostrar las imágenes en los listados de la aplicación</string>
+    <string name="pref_description_showimage_on" translatable="false">Muestra las imágenes</string>
+
+    <string name="pref_summary_numcolumn" translatable="false">Número de columnas que se mostrarán en los lisstados RecyclerView</string>
+    <string name="pref_title_numcolumn" translatable="false">Número de columnas</string>
+    <string name="pref_title_about" translatable="false">Sobre nosotros</string>
+    <string-array name="pref_entries_numcolumn">
+        <item>1 columna</item>
+        <item>2 columnas</item>
+        <item>3 columnas</item>
+        <item>4 columnas</item>
+    </string-array>
+    <string-array name="pref_entryvalues_numcolumn">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string name="pref_category_account" translatable="false">Preferencias de cuenta</string>
+    <string name="pref_title_remember" translatable="false">Recordar usuario</string>
+
+    <string name="pref_description_remember" translatable="false">Recordar las credenciales de usuario</string>
+    <string name="pref_description_remember_off" translatable="false">No se recuerdan las credenciales de usuario</string>
+    <string name="pref_description_remember_on" translatable="false">Se recuerdan las credenciales de usuario</string>
+    <string name="pref_user_default" translatable="false">Usuario</string>
+    <string name="pref_user_title" translatable="false">Nombre de usuario</string>
+
+
+</resources>

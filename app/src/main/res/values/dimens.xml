@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="llo_login_margin">32dp</dimen>
+    <dimen name="txvSignIn_margin">24dp</dimen>
+    <dimen name="edtUser_margin">24dp</dimen>
+    <dimen name="btnSignIn_margin">72dp</dimen>
+    <dimen name="llo_Sign_Options_padding">8dp</dimen>
+    <dimen name="btnGoogleSign_margin">8dp</dimen>
+    <dimen name="imgDashboardWidth">0dp</dimen>
+    <dimen name="imgDashboardHeight">0dp</dimen>
+    <dimen name="letter_icon_size">48dp</dimen>
+    <dimen name="list_padding_top">8dp</dimen>
+    <dimen name="list_primary_text">16sp</dimen>
+    <dimen name="list_secondary_text">14sp</dimen>
+    <dimen name="margin_fab">16dp</dimen>
+</resources>
