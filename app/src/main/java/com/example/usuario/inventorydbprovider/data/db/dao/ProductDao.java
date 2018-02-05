@@ -32,8 +32,7 @@ public class ProductDao {
             do {
                 products.add(new Product(
                                 cursor.getInt(0),
-                                cursor.getInt(1),
-                                cursor.getString(2),
+                        cursor.getString(2),
                                 cursor.getString(3),
                                 cursor.getString(4),
                                 cursor.getString(5),
@@ -112,7 +111,6 @@ public class ProductDao {
     public ContentValues createContent(Product product) {
         //ContentValues funciona como un mapa
         ContentValues contentValues = new ContentValues();
-        contentValues.put(InventoryContract.ProductEntry.COLUMN_DEPENDENCY_ID, product.getDependencyId());
         contentValues.put(InventoryContract.ProductEntry.COLUMN_SERIAL, product.getDatePurchase());
         contentValues.put(InventoryContract.ProductEntry.COLUMN_MODEL_CODE, product.getModelCode());
         contentValues.put(InventoryContract.ProductEntry.COLUMN_SHORTNAME, product.getShortname());

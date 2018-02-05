@@ -10,7 +10,7 @@ import java.util.HashMap;
  */
 public final class InventoryContract {
 
-    public static final int DATABASE_VERSION = 9;
+    public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Inventory.db";
     //Constructor privado para que no sea instanciada
     private InventoryContract() { }
@@ -213,7 +213,7 @@ public final class InventoryContract {
                 "%s " +
                         "INNER JOIN %s ON %s.%s = %s.%s " +
                         "INNER JOIN %s ON %s.%s = %s.%s " +
-                        "INNER JOIN %s ON %s.%s = %s.%s ",
+                        "INNER JOIN %s ON %s.%s = %s.%s",
                 ProductViewEntry.TABLE_NAME,
                 COLUMN_CATEGORY_ID, ProductViewEntry.TABLE_NAME, COLUMN_CATEGORY_ID, CategoryEntry.TABLE_NAME, CategoryEntry._ID,
                 COLUMN_PRODUCT_CLASS_ID, ProductViewEntry.TABLE_NAME, COLUMN_PRODUCT_CLASS_ID, ProductClassEntry.TABLE_NAME, ProductClassEntry._ID,
@@ -225,7 +225,6 @@ public final class InventoryContract {
 
         static {
             sProductViewProjectionMap = new HashMap<>();
-            //No se pone porque es redundante
             sProductViewProjectionMap.put(ProductEntry._ID, ProductEntry.TABLE_NAME + "." + BaseColumns._ID);
             sProductViewProjectionMap.put(COLUMN_SERIAL, COLUMN_SERIAL);
             sProductViewProjectionMap.put(COLUMN_MODEL_CODE, COLUMN_MODEL_CODE);
@@ -251,7 +250,6 @@ public final class InventoryContract {
     public static class ProductEntry implements BaseColumns {
 
         public static final String TABLE_NAME = "product";
-        public static final String COLUMN_DEPENDENCY_ID = "dependencyId";
         public static final String COLUMN_SERIAL = "serial";
         public static final String COLUMN_MODEL_CODE = "modelCode";
         public static final String COLUMN_SHORTNAME = "shortname";
@@ -289,7 +287,6 @@ public final class InventoryContract {
         //En el mismo orden que las declaramos
         public static final String[] ALL_COLUMNS = new String[]{
                 BaseColumns._ID,
-                COLUMN_DEPENDENCY_ID,
                 COLUMN_SERIAL,
                 COLUMN_MODEL_CODE,
                 COLUMN_SHORTNAME,
@@ -311,7 +308,6 @@ public final class InventoryContract {
 
         public static final String SQL_CREATE_ENTRIES = String.format(
                 "CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        "%s INTEGER NOT NULL, " +
                         "%s TEXT NOT NULL, " +
                         "%s TEXT NOT NULL, " +
                         "%s TEXT NOT NULL, " +
@@ -332,7 +328,6 @@ public final class InventoryContract {
                         "%s" +
                         ")",
                 TABLE_NAME, BaseColumns._ID,
-                COLUMN_DEPENDENCY_ID,
                 COLUMN_SERIAL,
                 COLUMN_MODEL_CODE,
                 COLUMN_SHORTNAME,
@@ -357,8 +352,7 @@ public final class InventoryContract {
                 "DROP TABLE IF EXISTS %s", TABLE_NAME);
 
         public static final String SQL_INSERT_ENTRIES = String.format(
-                "INSERT INTO %s (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) VALUES ", TABLE_NAME,
-                COLUMN_DEPENDENCY_ID,
+                "INSERT INTO %s (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) VALUES ", TABLE_NAME,
                 COLUMN_SERIAL,
                 COLUMN_MODEL_CODE,
                 COLUMN_SHORTNAME,
@@ -374,8 +368,7 @@ public final class InventoryContract {
                 COLUMN_URL,
                 COLUMN_DATE_PURCHASE,
                 COLUMN_NOTES
-        ) + String.format("(%s, '%s', '%s', '%s', '%s', %s, %s, %s, %s, %s, '%s', %s, '%s', '%s', '%s', '%s'),",
-                1,
+        ) + String.format("('%s', '%s', '%s', '%s', %s, %s, %s, %s, %s, '%s', %s, '%s', '%s', '%s', '%s'),",
                 "PC_01",
                 "ASUS MM 2020",
                 "ASUS Muy Malo 2020",
@@ -391,8 +384,7 @@ public final class InventoryContract {
                 "www.hotmail.com",
                 "1995-12-12",
                 "¿Este? para Enrique >:D"
-        ) + String.format("(%s, '%s', '%s', '%s', '%s', %s, %s, %s, %s, %s, '%s', %s, '%s', '%s', '%s', '%s'),",
-                1,
+        ) + String.format("('%s', '%s', '%s', '%s', %s, %s, %s, %s, %s, '%s', %s, '%s', '%s', '%s', '%s'),",
                 "PC_02",
                 "ASUS MM 2020",
                 "ASUS Muy Malo 2020",
@@ -408,8 +400,7 @@ public final class InventoryContract {
                 "www.gmail.com",
                 "1995-12-12",
                 "¿Este? para Jaime >:D"
-        ) + String.format("(%s, '%s', '%s', '%s', '%s', %s, %s, %s, %s, %s, '%s', %s, '%s', '%s', '%s', '%s'),",
-                2,
+        ) + String.format("('%s', '%s', '%s', '%s', %s, %s, %s, %s, %s, '%s', %s, '%s', '%s', '%s', '%s'),",
                 "PC_03",
                 "ASUS MM 2020",
                 "ASUS Muy Malo 2020",
@@ -425,8 +416,7 @@ public final class InventoryContract {
                 "www.gmail.com",
                 "1995-12-12",
                 "¿Este? para Pablo >:D"
-        ) + String.format("(%s, '%s', '%s', '%s', '%s', %s, %s, %s, %s, %s, '%s', %s, '%s', '%s', '%s', '%s'),",
-                1,
+        ) + String.format("('%s', '%s', '%s', '%s', %s, %s, %s, %s, %s, '%s', %s, '%s', '%s', '%s', '%s'),",
                 "Monitor ACER",
                 "ACER 256PX",
                 "ASUS con 256 píxeles",
@@ -442,15 +432,14 @@ public final class InventoryContract {
                 "www.gmail.com",
                 "1995-12-12",
                 "¿Este? para Nico >:D"
-        ) + String.format("(%s, '%s', '%s', '%s', '%s', %s, %s, %s, %s, %s, '%s', %s, '%s', '%s', '%s', '%s'),",
-                1,
+        ) + String.format("('%s', '%s', '%s', '%s', %s, %s, %s, %s, %s, '%s', %s, '%s', '%s', '%s', '%s'),",
                 "CPU_01",
                 "Tontel 16Hz",
                 "CPU Tontel de 16Hz",
                 "Con overclock se queda en 17Hz",
                 2,
                 2,
-                3,
+                2,
                 12,
                 1066.66f,
                 "ASUSTEK3",
@@ -459,15 +448,14 @@ public final class InventoryContract {
                 "www.tontel.co.nz",
                 "2995-12-12",
                 "¿Este? para Salva >:D"
-        ) + String.format("(%s, '%s', '%s', '%s', '%s', %s, %s, %s, %s, %s, '%s', %s, '%s', '%s', '%s', '%s')",
-                1,
+        ) + String.format("('%s', '%s', '%s', '%s', %s, %s, %s, %s, %s, '%s', %s, '%s', '%s', '%s', '%s')",
                 "Ventilador_01",
                 "RSP-6000",
                 "Resoplaplús 6000",
                 "Especial para los resopladores de 2º",
                 2,
                 2,
-                4,
+                2,
                 15,
                 20.00f,
                 "ASUSTEK4",

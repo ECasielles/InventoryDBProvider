@@ -22,7 +22,6 @@ public class Product implements Parcelable {
     };
 
     private int id;
-    private int dependencyId;
     private String serial;
     private String modelCode;
     private String shortname;
@@ -39,9 +38,8 @@ public class Product implements Parcelable {
     private String datePurchase;
     private String notes;
 
-    public Product(int id, int dependencyId, String serial, String modelCode, String shortname, String description, int category, int productClass, int sectorID, int quantity, float value, String vendor, int bitmap, String imageName, String url, String datePurchase, String notes) {
+    public Product(int id, String serial, String modelCode, String shortname, String description, int category, int productClass, int sectorID, int quantity, float value, String vendor, int bitmap, String imageName, String url, String datePurchase, String notes) {
         this.id = id;
-        this.dependencyId = dependencyId;
         this.serial = serial;
         this.modelCode = modelCode;
         this.shortname = shortname;
@@ -62,7 +60,6 @@ public class Product implements Parcelable {
 
     protected Product(Parcel in) {
         id = in.readInt();
-        dependencyId = in.readInt();
         serial = in.readString();
         modelCode = in.readString();
         shortname = in.readString();
@@ -86,14 +83,6 @@ public class Product implements Parcelable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getDependencyId() {
-        return dependencyId;
-    }
-
-    public void setDependencyId(int dependencyId) {
-        this.dependencyId = dependencyId;
     }
 
     public String getSerial() {
@@ -225,7 +214,6 @@ public class Product implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(id);
-        parcel.writeInt(dependencyId);
         parcel.writeString(serial);
         parcel.writeString(modelCode);
         parcel.writeString(shortname);

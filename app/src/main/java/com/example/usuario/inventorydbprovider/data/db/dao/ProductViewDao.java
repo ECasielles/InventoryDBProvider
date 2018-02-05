@@ -36,22 +36,21 @@ public class ProductViewDao {
             do {
                 productViews.add(new ProductView(new Product(
                                 cursor.getInt(0),
-                                cursor.getInt(1),
+                                cursor.getString(1),
                                 cursor.getString(2),
                                 cursor.getString(3),
                                 cursor.getString(4),
-                                cursor.getString(5),
+                                cursor.getInt(5),
                                 cursor.getInt(6),
                                 cursor.getInt(7),
                                 cursor.getInt(8),
-                                cursor.getInt(9),
-                                cursor.getFloat(10),
-                                cursor.getString(11),
-                                cursor.getInt(12),
+                                cursor.getFloat(9),
+                                cursor.getString(10),
+                                cursor.getInt(11),
+                                cursor.getString(12),
                                 cursor.getString(13),
                                 cursor.getString(14),
-                                cursor.getString(15),
-                                cursor.getString(16)
+                                cursor.getString(15)
                         ))
                 );
             } while (cursor.moveToNext());
@@ -62,58 +61,40 @@ public class ProductViewDao {
     }
 
     public ProductView search(int id) {
-        /*
-            SQLiteDatabase database = InventoryOpenHelper.getInstance().openDatabase();
-        SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-        String selection = InventoryContract.ProductInnerEntry.TABLE_NAME + "." + BaseColumns._ID + "=?";
-        String[] selectionArgs = new String[] {String.valueOf(id)};
-        ProductView productView = null;
-
-        queryBuilder.setTables(InventoryContract.ProductInnerEntry.PRODUCT_INNER);
-        queryBuilder.setProjectionMap(InventoryContract.ProductInnerEntry.sProductInnerProjectionMap);
-
-        Cursor cursor = queryBuilder.query(database, InventoryContract.ProductInnerEntry.ALL_COLUMNS,
-selection, selectionArgs, null, null, null);
-         */
         SQLiteDatabase database = InventoryOpenHelper.getInstance().openDatabase();
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-        String selection = InventoryContract.ProductViewEntry.TABLE_NAME + "." + BaseColumns._ID + "=?";
-        String[] selectionArgs = new String[]{String.valueOf(id)};
+        String selection = InventoryContract.ProductViewEntry.TABLE_NAME + "." + BaseColumns._ID + " = ?";
+        String[] selectionArgs = new String[] {String.valueOf(id + 1)};
         ProductView productView = null;
 
         queryBuilder.setTables(InventoryContract.ProductViewEntry.PRODUCT_INNER);
         queryBuilder.setProjectionMap(InventoryContract.ProductViewEntry.sProductViewProjectionMap);
 
-        //Comprueba si la consulta es correcta
-        String sql = queryBuilder.buildQuery(
+        Log.i("ProductViewDao", queryBuilder.buildQuery(
                 InventoryContract.ProductViewEntry.ALL_COLUMNS,
-                null, null, null, null,
-                null
-        );
-        Log.i("ProductViewDao", sql);
+                null, null, null, null, null));
+
 
         Cursor cursor = queryBuilder.query(database, InventoryContract.ProductViewEntry.ALL_COLUMNS,
-                selection, selectionArgs, null, null, null);
-
+                selection, selectionArgs, null, null, null, null);
         if (cursor.moveToFirst()) {
             do {
                 productView = new ProductView(
                         cursor.getInt(0),
-                        0,
                         cursor.getString(1),
                         cursor.getString(2),
                         cursor.getString(3),
                         cursor.getString(4),
                         cursor.getInt(5),
-                        cursor.getInt(6),
+                        cursor.getString(6),
                         cursor.getInt(7),
-                        cursor.getInt(8),
-                        cursor.getFloat(9),
+                        cursor.getString(8),
+                        cursor.getInt(9),
                         cursor.getString(10),
                         cursor.getInt(11),
-                        cursor.getString(12),
+                        cursor.getFloat(12),
                         cursor.getString(13),
-                        cursor.getString(14),
+                        cursor.getInt(14),
                         cursor.getString(15),
                         cursor.getString(16),
                         cursor.getString(17),
@@ -121,9 +102,8 @@ selection, selectionArgs, null, null, null);
                 );
             } while (cursor.moveToNext());
         }
-        cursor.close();
-        InventoryOpenHelper.getInstance().closeDatabase();
 
+        InventoryOpenHelper.getInstance().closeDatabase();
         return productView;
     }
 }

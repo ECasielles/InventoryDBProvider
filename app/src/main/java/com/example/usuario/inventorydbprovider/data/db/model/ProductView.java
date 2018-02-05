@@ -26,15 +26,19 @@ public class ProductView extends Product {
     String productClassDescription;
     String sectorName;
 
-    public ProductView(int id, int dependencyId, String serial, String modelCode, String shortname, String description, int category, int productClass, int sectorID, int quantity, float value, String vendor, int bitmap, String imageName, String url, String datePurchase, String notes, String categoryName, String productClassDescription, String sectorName) {
-        super(id, dependencyId, serial, modelCode, shortname, description, category, productClass, sectorID, quantity, value, vendor, bitmap, imageName, url, datePurchase, notes);
+    public ProductView(int id, String serial, String modelCode, String shortname, String description, int category,
+                       String categoryName, int productClass, String productClassDescription,
+                       int sectorID, String sectorName, int quantity, float value,
+                       String vendor, int bitmap, String imageName, String url,
+                       String datePurchase, String notes) {
+        super(id, serial, modelCode, shortname, description, category, productClass, sectorID, quantity, value, vendor, bitmap, imageName, url, datePurchase, notes);
         this.categoryName = categoryName;
         this.productClassDescription = productClassDescription;
         this.sectorName = sectorName;
     }
 
     public ProductView(Product product) {
-        super(product.get_ID(), product.getDependencyId(), product.getSerial(),
+        super(product.get_ID(), product.getSerial(),
                 product.getModelCode(), product.getShortname(), product.getDescription(),
                 product.getCategory(), product.getProductClass(), product.getSectorID(),
                 product.getQuantity(), product.getValue(), product.getVendor(),
