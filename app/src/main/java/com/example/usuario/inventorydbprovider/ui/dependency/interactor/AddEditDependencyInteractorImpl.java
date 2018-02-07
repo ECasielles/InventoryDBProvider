@@ -2,7 +2,6 @@ package com.example.usuario.inventorydbprovider.ui.dependency.interactor;
 
 import com.example.usuario.inventorydbprovider.data.db.model.Dependency;
 import com.example.usuario.inventorydbprovider.data.db.repository.DependencyRepository;
-import com.example.usuario.inventorydbprovider.utils.Error;
 
 /**
  * Created by usuario on 27/11/17.
@@ -19,6 +18,7 @@ public class AddEditDependencyInteractorImpl implements AddEditDependencyInterac
     //Aquí habría que controlarlo con excepciones en lugar de elseif
     @Override
     public void validateDependency(String name, String shortname, String description, String imageName) {
+        Dependency dependency = new Dependency(-1, name, shortname, description, imageName);
         if (name.isEmpty())
             listener.onNameEmptyError();
         else if (shortname.isEmpty())
@@ -27,7 +27,7 @@ public class AddEditDependencyInteractorImpl implements AddEditDependencyInterac
             listener.onShortNameLengthError();
         else if (description.isEmpty())
             listener.onDescriptionEmptyError();
-        else if (DependencyRepository.getInstance().exists(name, shortname))
+        else if (DependencyRepository.getInstance().exists(dependency))
             addDependency(name, shortname, description, imageName);
     }
 
@@ -51,7 +51,7 @@ public class AddEditDependencyInteractorImpl implements AddEditDependencyInterac
     }
 
     @Override
-    public void onError(Error error) {
+    public void onError(Throwable error) {
         listener.onDatabaseError(error);
     }
 

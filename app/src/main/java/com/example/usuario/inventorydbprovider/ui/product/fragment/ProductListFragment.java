@@ -2,6 +2,7 @@ package com.example.usuario.inventorydbprovider.ui.product.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -63,11 +64,10 @@ public class ProductListFragment extends ListFragment implements ProductListCont
         getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                //Parcelable parcel = ProductRepository.getInstance().search(position);
-                Toast.makeText(getActivity(), ProductRepository.getInstance().search(position) == null ? "NULL" : "NOT NULL", Toast.LENGTH_SHORT).show();
-                //Bundle bundle = new Bundle();
-                //bundle.putParcelable(ProductView.TAG, parcel);
-                //callback.viewProduct(bundle);
+                Parcelable parcel = ProductRepository.getInstance().search(position);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(ProductView.TAG, parcel);
+                callback.viewProduct(bundle);
             }
         });
     }

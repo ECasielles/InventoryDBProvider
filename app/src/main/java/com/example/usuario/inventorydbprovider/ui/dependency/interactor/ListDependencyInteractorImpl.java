@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 
 import com.example.usuario.inventorydbprovider.data.db.model.Dependency;
 import com.example.usuario.inventorydbprovider.data.db.repository.DependencyRepository;
-import com.example.usuario.inventorydbprovider.utils.Error;
 
 import java.util.ArrayList;
 
@@ -35,7 +34,7 @@ public class ListDependencyInteractorImpl implements ListDependencyInteractor {
     }
 
     @Override
-    public void onError(Error error) {
+    public void onError(Throwable error) {
         listener.onDatabaseError(error);
     }
 

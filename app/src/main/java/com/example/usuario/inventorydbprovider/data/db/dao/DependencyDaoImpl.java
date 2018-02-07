@@ -6,6 +6,7 @@ import android.database.DatabaseUtils;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.usuario.inventorydbprovider.data.db.DependencyDao;
 import com.example.usuario.inventorydbprovider.data.db.InventoryContract;
 import com.example.usuario.inventorydbprovider.data.db.InventoryOpenHelper;
 import com.example.usuario.inventorydbprovider.data.db.model.Dependency;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  * Este Dao hace todas las operaciones de tabla en la Base de Datos.
  */
 //Los puristas usan hilos en el dao porque AsyncTask trabaja directamente con la vista
-public class DependencyDao {
+public class DependencyDaoImpl implements DependencyDao {
     ArrayList<Dependency> dependencies;
 
     /**
@@ -88,12 +89,13 @@ public class DependencyDao {
         }
     }
 
-    public boolean exists(String name, String shortname) {
+    @Override
+    public boolean exists(Dependency dependency) {
         SQLiteDatabase sqLiteDatabase = InventoryOpenHelper.getInstance().openDatabase();
         return DatabaseUtils.queryNumEntries(sqLiteDatabase,
                 InventoryContract.DependencyEntry.TABLE_NAME,
                 InventoryContract.DependencyEntry.WHERE_NAME_AND_SHORTNAME,
-                new String[]{name, shortname}) > 0;
+                new String[]{dependency.getName(), dependency.getShortname()}) > 0;
     }
 
     public int update(Dependency dependency) {

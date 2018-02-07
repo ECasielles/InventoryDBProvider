@@ -10,7 +10,7 @@ import java.util.HashMap;
  */
 public final class InventoryContract {
 
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "Inventory.db";
     //Constructor privado para que no sea instanciada
     private InventoryContract() { }
@@ -166,6 +166,7 @@ public final class InventoryContract {
         );
     }
 
+    //IMPORTANTE: ESCRIBIR CON LENTITUD, HACER LOGS Y DEPURAR SIEMPRE
     public static class ProductViewEntry implements BaseColumns {
 
         public static final String TABLE_NAME = "product";
@@ -188,7 +189,9 @@ public final class InventoryContract {
         public static final String COLUMN_DATE_PURCHASE = "datePurchase";
         public static final String COLUMN_NOTES = "notes";
 
+        //IMPORTANTE: NO OLVIDAR PONER EL ID EN ALL COLUMNS
         public static final String[] ALL_COLUMNS = new String[]{
+                BaseColumns._ID,
                 COLUMN_SERIAL,
                 COLUMN_MODEL_CODE,
                 COLUMN_SHORTNAME,
@@ -209,15 +212,16 @@ public final class InventoryContract {
                 COLUMN_NOTES
         };
 
+        //IMPORTANTE: "INNER JOIN ALGO_ID ON ALGO_ID = ALGO_TABLA._ID"
         public static final String PRODUCT_INNER = String.format(
                 "%s " +
-                        "INNER JOIN %s ON %s.%s = %s.%s " +
-                        "INNER JOIN %s ON %s.%s = %s.%s " +
-                        "INNER JOIN %s ON %s.%s = %s.%s",
+                        "INNER JOIN %s ON %s = %s.%s " +
+                        "INNER JOIN %s ON %s = %s.%s " +
+                        "INNER JOIN %s ON %s = %s.%s",
                 ProductViewEntry.TABLE_NAME,
-                COLUMN_CATEGORY_ID, ProductViewEntry.TABLE_NAME, COLUMN_CATEGORY_ID, CategoryEntry.TABLE_NAME, CategoryEntry._ID,
-                COLUMN_PRODUCT_CLASS_ID, ProductViewEntry.TABLE_NAME, COLUMN_PRODUCT_CLASS_ID, ProductClassEntry.TABLE_NAME, ProductClassEntry._ID,
-                COLUMN_SECTOR_ID, ProductViewEntry.TABLE_NAME, COLUMN_SECTOR_ID, SectorEntry.TABLE_NAME, SectorEntry._ID
+                COLUMN_CATEGORY_ID, COLUMN_CATEGORY_ID, CategoryEntry.TABLE_NAME, CategoryEntry._ID,
+                COLUMN_PRODUCT_CLASS_ID, COLUMN_PRODUCT_CLASS_ID, ProductClassEntry.TABLE_NAME, ProductClassEntry._ID,
+                COLUMN_SECTOR_ID, COLUMN_SECTOR_ID, SectorEntry.TABLE_NAME, SectorEntry._ID
         );
         public static final String DEFAULT_SORT = BaseColumns._ID;
 
@@ -392,7 +396,7 @@ public final class InventoryContract {
                 1,
                 1,
                 1,
-                1,
+                11,
                 666.66f,
                 "ASUSTEK",
                 -1,
@@ -408,7 +412,7 @@ public final class InventoryContract {
                 1,
                 1,
                 1,
-                1,
+                10,
                 666.66f,
                 "ASUSTEK",
                 -1,
@@ -422,7 +426,7 @@ public final class InventoryContract {
                 "ASUS con 256 píxeles",
                 "Sólo se ven dos colores",
                 2,
-                2,
+                1,
                 2,
                 12,
                 166.66f,
@@ -437,8 +441,8 @@ public final class InventoryContract {
                 "Tontel 16Hz",
                 "CPU Tontel de 16Hz",
                 "Con overclock se queda en 17Hz",
-                2,
-                2,
+                3,
+                1,
                 2,
                 12,
                 1066.66f,
@@ -453,8 +457,8 @@ public final class InventoryContract {
                 "RSP-6000",
                 "Resoplaplús 6000",
                 "Especial para los resopladores de 2º",
-                2,
-                2,
+                3,
+                4,
                 2,
                 15,
                 20.00f,

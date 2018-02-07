@@ -19,7 +19,6 @@ import java.util.ArrayList;
 
 public class ProductViewDao {
 
-
     public ArrayList<ProductView> loadAll() {
         ArrayList<ProductView> productViews = new ArrayList<>();
         SQLiteDatabase db = InventoryOpenHelper.getInstance().openDatabase();
@@ -74,9 +73,9 @@ public class ProductViewDao {
                 InventoryContract.ProductViewEntry.ALL_COLUMNS,
                 null, null, null, null, null));
 
-
         Cursor cursor = queryBuilder.query(database, InventoryContract.ProductViewEntry.ALL_COLUMNS,
-                selection, selectionArgs, null, null, null, null);
+                selection, selectionArgs, null, null, null);
+
         if (cursor.moveToFirst()) {
             do {
                 productView = new ProductView(

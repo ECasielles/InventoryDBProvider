@@ -34,6 +34,11 @@
         <activity android:name="com.example.usuario.inventorydbprovider.ui.prefs.GeneralSettingsActivity"/>
         <activity android:name="com.example.usuario.inventorydbprovider.ui.prefs.AccountSettingsActivity"/>
         <activity android:name="com.example.usuario.inventorydbprovider.ui.about.AboutActivity"/>
+
+        <provider
+            android:authorities="com.example.usuario.inventorydbprovider"
+            android:name=".data.provider.InventoryProvider"
+            />
     </application>
 
 </manifest>
