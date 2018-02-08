@@ -33,6 +33,7 @@ public class DependencyDaoImpl implements DependencyDao {
         //2: Consulta al provider con la Uri de Dependency
         // Content Provider está registrado en el sistema
         //IMPORTANTE: getContentResolver hace la petición y devuelve el provider
+
         ContentResolver resolver = InventoryApplication.getContext().getContentResolver();
         Cursor cursor = resolver.query(InventoryProviderContract.Dependency.CONTENT_URI,
                 projection, null, null, null);
@@ -58,6 +59,15 @@ public class DependencyDaoImpl implements DependencyDao {
             return -1;
         //getLastPathSegment corresponde al último elemento de la uri (id del elemento)
         return Long.parseLong(uri.getLastPathSegment());
+    }
+
+    @Override
+    public int update(Dependency dependency) {
+        ContentResolver resolver = InventoryApplication.getContext().getContentResolver();
+        String selection = InventoryProviderContract.Dependency._ID + " = ? ";
+        String[] selectionArgs = new String[]{String.valueOf(dependency.get_ID())};
+        Uri uri = InventoryProviderContract.Dependency.CONTENT_URI;
+        return resolver.update(uri, createContent(dependency), selection, selectionArgs);
     }
 
     @Override
@@ -101,12 +111,34 @@ public class DependencyDaoImpl implements DependencyDao {
     }
 
     @Override
-    public int update(Dependency dependency) {
+    public Dependency search(int id) {
+        Dependency tempDependency = null;
+
+        String[] projection = new String[] {
+                InventoryProviderContract.Dependency._ID,
+                InventoryProviderContract.Dependency.NAME,
+                InventoryProviderContract.Dependency.SHORTNAME,
+                InventoryProviderContract.Dependency.DESCRIPTION,
+                InventoryProviderContract.Dependency.IMAGENAME
+        };
+
+        String selection = InventoryProviderContract.Dependency.CONTENT_PATH + "." +
+                InventoryProviderContract.Dependency._ID + " = ? ";
+        String[] selectionArgs = new String[]{String.valueOf(id)};
+
         ContentResolver resolver = InventoryApplication.getContext().getContentResolver();
-        String selection = InventoryProviderContract.Dependency._ID + " = ? ";
-        String[] selectionArgs = new String[]{String.valueOf(dependency.get_ID())};
-        Uri uri = InventoryProviderContract.Dependency.CONTENT_URI;
-        return resolver.update(uri, createContent(dependency), selection, selectionArgs);
+        Cursor cursor = resolver.query(InventoryProviderContract.Dependency.CONTENT_URI,
+                projection, selection, selectionArgs, null);
+
+        if(cursor != null && cursor.moveToFirst()) {
+            do {
+                tempDependency = new Dependency(
+                        cursor.getInt(0),
+                        cursor.getString(1), cursor.getString(2),
+                        cursor.getString(3), cursor.getString(4));
+            } while (cursor.moveToNext());
+        }
+        return tempDependency;
     }
 
     @Override

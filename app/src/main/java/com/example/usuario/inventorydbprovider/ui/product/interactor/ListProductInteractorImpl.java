@@ -6,11 +6,11 @@ import com.example.usuario.inventorydbprovider.data.db.repository.ProductReposit
  * Created by usuario on 1/02/18.
  */
 
-public class ProductListInteractorImpl implements ProductListInteractor {
+public class ListProductInteractorImpl implements ListProductInteractor {
 
-    private ProductListInteractor.OnProductLoadedListener listener;
+    private ListProductInteractor.OnProductLoadedListener listener;
 
-    public ProductListInteractorImpl(OnProductLoadedListener listener) {
+    public ListProductInteractorImpl(OnProductLoadedListener listener) {
         this.listener = listener;
     }
 
@@ -19,4 +19,13 @@ public class ProductListInteractorImpl implements ProductListInteractor {
         listener.onProductViewsLoaded(ProductRepository.getInstance().getProducts());
     }
 
+    @Override
+    public void onSuccess() {
+
+    }
+
+    @Override
+    public void onError(Throwable throwable) {
+
+    }
 }

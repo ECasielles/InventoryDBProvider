@@ -17,4 +17,5 @@ public interface DependencyDao {
     boolean exists(Dependency dependency);
     int update(Dependency dependency);
     ContentValues createContent(Dependency dependency);
+    Dependency search(int id);
 }

@@ -118,24 +118,27 @@ public class AddEditDependencyFragment extends BaseFragment implements AddEditDe
             }
         });
 
-        //Por defecto está en ADD_MODE
-        addEditMode = new AddEdit();
-        if(getArguments() != null) {
-            addEditMode.setMode(AddEdit.EDIT_MODE);
-            Dependency dependency = getArguments().getParcelable(Dependency.TAG);
-            tilName.getEditText().setText(dependency.getName());
-            tilShortName.getEditText().setText(dependency.getShortname());
-            tilDescription.getEditText().setText(dependency.getDescription());
-            tilName.setEnabled(false);
-            tilShortName.setEnabled(false);
-        }
-
         return rootView;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        //Por defecto está en ADD_MODE
+        addEditMode = new AddEdit();
+        if(getArguments() != null) {
+            addEditMode.setMode(AddEdit.EDIT_MODE);
+            Dependency dependency = getArguments().getParcelable(Dependency.TAG);
+            if(dependency != null) {
+                tilName.getEditText().setText(dependency.getName());
+                tilShortName.getEditText().setText(dependency.getShortname());
+                tilDescription.getEditText().setText(dependency.getDescription());
+                tilName.setEnabled(false);
+                tilShortName.setEnabled(false);
+            }
+        }
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -220,4 +223,5 @@ public class AddEditDependencyFragment extends BaseFragment implements AddEditDe
     public interface AddEditDependencyListener {
         void listDependency();
     }
+
 }

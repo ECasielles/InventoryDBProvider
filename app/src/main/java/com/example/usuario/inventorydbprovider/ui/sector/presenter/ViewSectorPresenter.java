@@ -1,6 +1,9 @@
-package com.example.usuario.inventorydbprovider.ui.sector;
+package com.example.usuario.inventorydbprovider.ui.sector.presenter;
 
 import com.example.usuario.inventorydbprovider.data.db.model.Sector;
+import com.example.usuario.inventorydbprovider.ui.sector.contract.ViewSectorContract;
+import com.example.usuario.inventorydbprovider.ui.sector.interactor.ViewSectorInteractor;
+import com.example.usuario.inventorydbprovider.ui.sector.interactor.ViewSectorInteractorImpl;
 
 public class ViewSectorPresenter implements ViewSectorContract.Presenter, ViewSectorInteractor.OnSectorsUpdatedListener {
 

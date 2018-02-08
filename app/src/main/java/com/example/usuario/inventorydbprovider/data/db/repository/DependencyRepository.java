@@ -21,24 +21,18 @@ import java.util.ArrayList;
 public class DependencyRepository {
 
     private static DependencyRepository dependencyRepository;
+    //Si hubiera una conexión, habría un dependencyDaoWebService, etc.
+    private DependencyDao dependencyDao;
 
     static {
         dependencyRepository = new DependencyRepository();
     }
-
-    //Si hubiera una conexión, habría un dependencyDaoWebService, etc.
-    private DependencyDao dependencyDao;
-
 
     private DependencyRepository() {
         //IMPORTANTE: ESTAMOS IMPORTANDO DE PROVIDER (DependencyDaoImpl)
         dependencyDao = new DependencyDaoImpl();
     }
 
-    /**
-     * Accesor de la clase DependencyRepository
-     * @return Devuelve la instancia de la clase como objeto DependencyRepository
-     */
     public static DependencyRepository getInstance(){
         //Nunca va a valer null si no se hace inicialización estática
         if (dependencyRepository == null)
@@ -50,6 +44,14 @@ public class DependencyRepository {
         return dependencyDao.loadAll();
     }
 
+    public void addDependency(Dependency dependency, DependencyCallback callback) {
+        long id = dependencyDao.add(dependency);
+        if (id == -1)
+            callback.onError(new Throwable());
+        else
+            callback.onSuccess();
+    }
+
     public void updateDependency(Dependency dependency, DependencyCallback callback) {
         int result = dependencyDao.update(dependency);
         if (result == 0) {
@@ -57,19 +59,6 @@ public class DependencyRepository {
             //lo va a capturar la vista
             callback.onError(new Throwable());
         } else
-            callback.onSuccess();
-    }
-
-    /**
-     * Devuelve el id del elemento añadido o -1.
-     * @param dependency
-     * @return
-     */
-    public void addDependency(Dependency dependency, DependencyCallback callback) {
-        long id = dependencyDao.add(dependency);
-        if (id == -1)
-            callback.onError(new Throwable());
-        else
             callback.onSuccess();
     }
 
@@ -84,5 +73,10 @@ public class DependencyRepository {
     public boolean exists(Dependency dependency) {
         return dependencyDao.exists(dependency);
     }
+
+    public Dependency search(int id) {
+        return dependencyDao.search(id);
+    }
+
 
 }

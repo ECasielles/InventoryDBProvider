@@ -19,7 +19,7 @@
     <string name="txvCategory">Category</string>
     <string name="txvSectorName">Subcategory</string>
     <string name="txvType">Type</string>
-    <string name="txvDescription">Descrition</string>
+    <string name="txvDescription">Description</string>
     <string name="txvPrice">Price</string>
     <string name="txvAcquisitionDate">Acq. date</string>
     <string name="txvProductInfoURL">URL</string>

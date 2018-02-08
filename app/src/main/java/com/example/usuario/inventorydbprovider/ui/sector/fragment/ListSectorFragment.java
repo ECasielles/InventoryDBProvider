@@ -1,4 +1,4 @@
-package com.example.usuario.inventorydbprovider.ui.sector;
+package com.example.usuario.inventorydbprovider.ui.sector.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import com.example.usuario.inventorydbprovider.R;
 import com.example.usuario.inventorydbprovider.adapter.SectorAdapter;
 import com.example.usuario.inventorydbprovider.data.db.model.Sector;
+import com.example.usuario.inventorydbprovider.ui.sector.SectorActivity;
+import com.example.usuario.inventorydbprovider.ui.sector.contract.ListSectorContract;
+import com.example.usuario.inventorydbprovider.ui.sector.presenter.ListSectorPresenter;
 
 import java.util.ArrayList;
 

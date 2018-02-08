@@ -1,4 +1,4 @@
-package com.example.usuario.inventorydbprovider.ui.sector;
+package com.example.usuario.inventorydbprovider.ui.sector.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,6 +13,9 @@ import android.widget.TextView;
 
 import com.example.usuario.inventorydbprovider.R;
 import com.example.usuario.inventorydbprovider.data.db.model.Sector;
+import com.example.usuario.inventorydbprovider.ui.sector.SectorActivity;
+import com.example.usuario.inventorydbprovider.ui.sector.contract.ViewSectorContract;
+import com.example.usuario.inventorydbprovider.ui.sector.presenter.ViewSectorPresenter;
 import com.example.usuario.inventorydbprovider.utils.AddEdit;
 
 public class ViewSectorFragment extends Fragment implements ViewSectorContract.View {

@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 
 import com.example.usuario.inventorydbprovider.R;
+import com.example.usuario.inventorydbprovider.ui.sector.fragment.ListSectorFragment;
+import com.example.usuario.inventorydbprovider.ui.sector.fragment.ViewSectorFragment;
 
 /**
  * Actividad que maneja el alta de secciones
@@ -23,7 +25,7 @@ public class SectorActivity extends AppCompatActivity implements ListSectorFragm
     ListSectorFragment listSectorFragment;
     ViewSectorFragment viewSectorFragment;
     Toolbar toolbar;
-    FloatingActionButton fab;
+    public FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

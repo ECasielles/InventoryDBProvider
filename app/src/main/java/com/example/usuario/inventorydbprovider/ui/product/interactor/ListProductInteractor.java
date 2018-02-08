@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Created by usuario on 1/02/18.
  */
 
-public interface ProductListInteractor {
+public interface ListProductInteractor extends ProductCallback {
 
     void loadProductViews();
 

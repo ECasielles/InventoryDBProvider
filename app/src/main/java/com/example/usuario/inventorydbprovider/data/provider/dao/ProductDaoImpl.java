@@ -90,6 +90,15 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
+    public int update(Product product) {
+        ContentResolver resolver = InventoryApplication.getContext().getContentResolver();
+        String selection = InventoryProviderContract.ProductViewEntry._ID + " = ? ";
+        String[] selectionArgs = new String[]{String.valueOf(product.get_ID())};
+        Uri uri = InventoryProviderContract.ProductViewEntry.CONTENT_URI;
+        return resolver.update(uri, createContent(product), selection, selectionArgs);
+    }
+
+    @Override
     public int delete(Product product) {
         ContentResolver resolver = InventoryApplication.getContext().getContentResolver();
         String selection = InventoryProviderContract.ProductViewEntry._ID + " = ? ";
@@ -159,15 +168,6 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public int update(Product product) {
-        ContentResolver resolver = InventoryApplication.getContext().getContentResolver();
-        String selection = InventoryProviderContract.ProductViewEntry._ID + " = ? ";
-        String[] selectionArgs = new String[]{String.valueOf(product.get_ID())};
-        Uri uri = InventoryProviderContract.ProductViewEntry.CONTENT_URI;
-        return resolver.update(uri, createContent(product), selection, selectionArgs);
-    }
-
-    @Override
     public ProductView search(int id) {
         ProductView tempProductView = null;
 
@@ -193,7 +193,8 @@ public class ProductDaoImpl implements ProductDao {
                 InventoryProviderContract.ProductViewEntry.NOTES
         };
 
-        String selection = InventoryProviderContract.ProductViewEntry._ID + " = ? ";
+        String selection = InventoryProviderContract.ProductViewEntry.CONTENT_PATH + "." +
+                InventoryProviderContract.ProductViewEntry._ID + " = ? ";
         String[] selectionArgs = new String[]{String.valueOf(id)};
 
         ContentResolver resolver = InventoryApplication.getContext().getContentResolver();

@@ -1,4 +1,4 @@
-package com.example.usuario.inventorydbprovider.ui.sector;
+package com.example.usuario.inventorydbprovider.ui.sector.contract;
 
 import com.example.usuario.inventorydbprovider.data.db.model.Sector;
 

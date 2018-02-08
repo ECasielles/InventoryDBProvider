@@ -69,6 +69,15 @@ public class SectorDaoImpl implements SectorDao {
     }
 
     @Override
+    public int update(Sector sector) {
+        ContentResolver resolver = InventoryApplication.getContext().getContentResolver();
+        String selection = InventoryProviderContract.Sector._ID + " = ? ";
+        String[] selectionArgs = new String[]{String.valueOf(sector.getID())};
+        Uri uri = InventoryProviderContract.Sector.CONTENT_URI;
+        return resolver.update(uri, createContent(sector), selection, selectionArgs);
+    }
+
+    @Override
     public int delete(Sector sector) {
         ContentResolver resolver = InventoryApplication.getContext().getContentResolver();
         String selection = InventoryProviderContract.Sector._ID + " = ? ";
@@ -89,10 +98,12 @@ public class SectorDaoImpl implements SectorDao {
                 InventoryProviderContract.Sector.DESCRIPTION,
                 InventoryProviderContract.Sector.IMAGENAME
         };
+        String selection = InventoryProviderContract.Sector.NAME + " = ? ";
+        String[] selectionArgs = new String[]{sector.getName()};
 
         ContentResolver resolver = InventoryApplication.getContext().getContentResolver();
         Cursor cursor = resolver.query(InventoryProviderContract.Sector.CONTENT_URI,
-                projection, null, null, null);
+                projection, selection, selectionArgs, null);
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
@@ -112,12 +123,41 @@ public class SectorDaoImpl implements SectorDao {
     }
 
     @Override
-    public int update(Sector sector) {
+    public Sector search(int id) {
+        Sector tempSector = null;
+
+        String[] projection = new String[] {
+                InventoryProviderContract.Sector._ID,
+                InventoryProviderContract.Sector.NAME,
+                InventoryProviderContract.Sector.DEPENDENCYID,
+                InventoryProviderContract.Sector.SHORTNAME,
+                InventoryProviderContract.Sector.DESCRIPTION,
+                InventoryProviderContract.Sector.IMAGENAME
+        };
+
+        String selection = InventoryProviderContract.Sector.CONTENT_PATH + "." +
+                InventoryProviderContract.Sector._ID + " = ? ";
+        String[] selectionArgs = new String[]{String.valueOf(id)};
+
         ContentResolver resolver = InventoryApplication.getContext().getContentResolver();
-        String selection = InventoryProviderContract.Sector._ID + " = ? ";
-        String[] selectionArgs = new String[]{String.valueOf(sector.getID())};
-        Uri uri = InventoryProviderContract.Sector.CONTENT_URI;
-        return resolver.update(uri, createContent(sector), selection, selectionArgs);
+        Cursor cursor = resolver.query(InventoryProviderContract.Sector.CONTENT_URI,
+                projection, selection, selectionArgs, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                tempSector = new Sector(
+                        cursor.getInt(0),
+                        cursor.getInt(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getString(5),
+                        false,
+                        false
+                );
+            } while (cursor.moveToNext());
+        }
+        return tempSector;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.usuario.inventorydbprovider.ui.sector;
+package com.example.usuario.inventorydbprovider.ui.sector.interactor;
 
 import com.example.usuario.inventorydbprovider.data.db.model.Sector;
 
@@ -6,7 +6,7 @@ import com.example.usuario.inventorydbprovider.data.db.model.Sector;
  * Created by icenri on 2/1/18.
  */
 
-public interface ViewSectorInteractor extends SectorRepositoryCallback {
+public interface ViewSectorInteractor extends SectorCallback {
 
     void updateSectors(Sector sector);
 

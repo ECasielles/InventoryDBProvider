@@ -17,4 +17,5 @@ public interface SectorDao {
     boolean exists(Sector sector);
     int update(Sector sector);
     ContentValues createContent(Sector sector);
+    Sector search(int id);
 }

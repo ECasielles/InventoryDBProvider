@@ -2,7 +2,7 @@ package com.example.usuario.inventorydbprovider.ui.product.interactor;
 
 
 
-public interface ProductViewInteractor {
+public interface ViewProductInteractor {
 
     interface OnProducViewLoadedListener {
 

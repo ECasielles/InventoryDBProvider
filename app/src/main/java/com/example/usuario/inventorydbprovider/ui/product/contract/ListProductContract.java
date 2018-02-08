@@ -8,10 +8,10 @@ import java.util.ArrayList;
  * Created by usuario on 1/02/18.
  */
 
-public interface ProductListContract {
+public interface ListProductContract {
 
     interface View {
-        void setPresenter(ProductListContract.Presenter presenter);
+        void setPresenter(ListProductContract.Presenter presenter);
 
         void showProductViews(ArrayList<ProductView> productViews);
     }

@@ -1,4 +1,4 @@
-package com.example.usuario.inventorydbprovider.ui.sector;
+package com.example.usuario.inventorydbprovider.ui.sector.interactor;
 
 import com.example.usuario.inventorydbprovider.data.db.repository.SectorRepository;
 
@@ -6,7 +6,7 @@ import com.example.usuario.inventorydbprovider.data.db.repository.SectorReposito
  * Created by icenri on 2/1/18.
  */
 
-class ListSectorInteractorImpl implements ListSectorInteractor {
+public class ListSectorInteractorImpl implements ListSectorInteractor {
 
     private OnSectorsLoadedListener listener;
 

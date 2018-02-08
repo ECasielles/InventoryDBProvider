@@ -78,13 +78,11 @@ public final class InventoryProviderContract {
 
         public static HashMap<String, String> sProductViewProjectionMap;
 
-        private static final String NAME = "";
-
         static {
             sProductViewProjectionMap = new HashMap<>();
             // Si se repite se recomienda poner la BD por si cambia algo
             // aunque parezca peor que sin provider
-            sProductViewProjectionMap.put(BaseColumns._ID, InventoryContract.ProductViewEntry.TABLE_NAME + "." + BaseColumns._ID);
+            sProductViewProjectionMap.put(BaseColumns._ID, InventoryContract.ProductViewEntry.TABLE_NAME + "." + InventoryContract.ProductViewEntry._ID);
             sProductViewProjectionMap.put(SERIAL, InventoryContract.ProductViewEntry.COLUMN_SERIAL);
             sProductViewProjectionMap.put(MODELCODE, InventoryContract.ProductViewEntry.COLUMN_MODEL_CODE);
             sProductViewProjectionMap.put(DESCRIPTION, InventoryContract.ProductViewEntry.TABLE_NAME + "." + InventoryContract.ProductViewEntry.COLUMN_DESCRIPTION);

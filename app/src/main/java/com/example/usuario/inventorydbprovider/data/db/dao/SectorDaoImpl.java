@@ -94,4 +94,9 @@ public class SectorDaoImpl implements SectorDao {
         return contentValues;
     }
 
+    @Override
+    public Sector search(int id) {
+        return null;
+    }
+
 }

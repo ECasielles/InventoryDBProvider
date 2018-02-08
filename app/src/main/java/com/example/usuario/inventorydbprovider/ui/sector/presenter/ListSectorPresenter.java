@@ -1,6 +1,9 @@
-package com.example.usuario.inventorydbprovider.ui.sector;
+package com.example.usuario.inventorydbprovider.ui.sector.presenter;
 
 import com.example.usuario.inventorydbprovider.data.db.model.Sector;
+import com.example.usuario.inventorydbprovider.ui.sector.contract.ListSectorContract;
+import com.example.usuario.inventorydbprovider.ui.sector.interactor.ListSectorInteractor;
+import com.example.usuario.inventorydbprovider.ui.sector.interactor.ListSectorInteractorImpl;
 
 import java.util.ArrayList;
 

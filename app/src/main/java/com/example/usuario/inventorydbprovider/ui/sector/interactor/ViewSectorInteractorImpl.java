@@ -1,4 +1,4 @@
-package com.example.usuario.inventorydbprovider.ui.sector;
+package com.example.usuario.inventorydbprovider.ui.sector.interactor;
 
 import com.example.usuario.inventorydbprovider.data.db.model.Sector;
 import com.example.usuario.inventorydbprovider.data.db.repository.SectorRepository;
@@ -22,6 +22,11 @@ public class ViewSectorInteractorImpl implements ViewSectorInteractor {
     @Override
     public void addSector(Sector sector) {
         SectorRepository.getInstance().addSector(sector, this);
+    }
+
+    @Override
+    public void onError(Throwable throwable) {
+
     }
 
     @Override

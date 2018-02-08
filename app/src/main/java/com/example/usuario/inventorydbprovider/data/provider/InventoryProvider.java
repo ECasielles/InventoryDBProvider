@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,6 +26,7 @@ public class InventoryProvider extends ContentProvider {
     private static final int DEPENDENCY_ID = 4;
     private static final int SECTOR = 5;
     private static final int SECTOR_ID = 6;
+    private static final int PRODUCT_VIEW = 7;
 
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     private SQLiteDatabase database;
@@ -34,20 +36,21 @@ public class InventoryProvider extends ContentProvider {
     //IMPORTANTE: # solo para id, content_path de cada product
     static {
         uriMatcher.addURI(InventoryProviderContract.AUTHORITY,
+                InventoryProviderContract.ProductViewEntry.CONTENT_PATH, PRODUCT);
+        uriMatcher.addURI(InventoryProviderContract.AUTHORITY,
                 InventoryProviderContract.ProductViewEntry.CONTENT_PATH + "/#", PRODUCT_ID);
         uriMatcher.addURI(InventoryProviderContract.AUTHORITY,
-                InventoryProviderContract.ProductViewEntry.CONTENT_PATH + "/", PRODUCT);
-        uriMatcher.addURI(InventoryProviderContract.AUTHORITY,
-                InventoryProviderContract.Dependency.CONTENT_PATH + "/", DEPENDENCY);
+                InventoryProviderContract.Dependency.CONTENT_PATH, DEPENDENCY);
         uriMatcher.addURI(InventoryProviderContract.AUTHORITY,
                 InventoryProviderContract.Dependency.CONTENT_PATH + "/#", DEPENDENCY_ID);
         uriMatcher.addURI(InventoryProviderContract.AUTHORITY,
-                InventoryProviderContract.Sector.CONTENT_PATH + "/", SECTOR);
+                InventoryProviderContract.Sector.CONTENT_PATH, SECTOR);
         uriMatcher.addURI(InventoryProviderContract.AUTHORITY,
                 InventoryProviderContract.Sector.CONTENT_PATH + "/#", SECTOR_ID);
+        uriMatcher.addURI(InventoryProviderContract.AUTHORITY,
+                InventoryProviderContract.ProductViewEntry.CONTENT_PATH, PRODUCT_VIEW);
     }
 
-    //TODO: REPASAR delete y update y hacerlo todo con los demás
 
     @Override
     public boolean onCreate() {
@@ -65,27 +68,34 @@ public class InventoryProvider extends ContentProvider {
         switch (uriMatcher.match(uri)) {
             case PRODUCT:
                 cursor = database.query(InventoryContract.ProductViewEntry.TABLE_NAME, projection,
-                        null, null, null, null, null);
+                        selection, selectionArgs, null, null, null);
                 break;
             case PRODUCT_ID:
                 cursor = database.query(InventoryContract.ProductViewEntry.TABLE_NAME, projection,
-                        null, null, null, null, null);
+                        selection, selectionArgs, null, null, null);
                 break;
             case DEPENDENCY:
                 cursor = database.query(InventoryContract.DependencyEntry.TABLE_NAME, projection,
-                        null, null, null, null, null);
+                        selection, selectionArgs, null, null, null);
                 break;
             case DEPENDENCY_ID:
                 cursor = database.query(InventoryContract.DependencyEntry.TABLE_NAME, projection,
-                        null, null, null, null, null);
+                        selection, selectionArgs, null, null, null);
                 break;
             case SECTOR:
                 cursor = database.query(InventoryContract.SectorEntry.TABLE_NAME, projection,
-                        null, null, null, null, null);
+                        selection, selectionArgs, null, null, null);
                 break;
             case SECTOR_ID:
                 cursor = database.query(InventoryContract.SectorEntry.TABLE_NAME, projection,
-                        null, null, null, null, null);
+                        selection, selectionArgs, null, null, null);
+                break;
+            case PRODUCT_VIEW:
+                SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+                queryBuilder.setTables(InventoryContract.ProductViewEntry.PRODUCT_INNER);
+                queryBuilder.setProjectionMap(InventoryProviderContract.ProductViewEntry.sProductViewProjectionMap);
+                cursor = queryBuilder.query(database, projection, selection, selectionArgs, null,
+                        null, null);
                 break;
             case UriMatcher.NO_MATCH:
                 throw new IllegalArgumentException("Invalid uri: " + uri);
@@ -102,10 +112,10 @@ public class InventoryProvider extends ContentProvider {
         switch (uriMatcher.match(uri)) {
             case PRODUCT:
                 return ("vnd.android.cursor.dir/vnd." + InventoryProviderContract.AUTHORITY + "/"
-                        + InventoryProviderContract.Dependency.CONTENT_PATH);
+                        + InventoryProviderContract.ProductViewEntry.CONTENT_PATH);
             case PRODUCT_ID:
                 return ("vnd.android.cursor.item/vnd." + InventoryProviderContract.AUTHORITY + "/"
-                        + InventoryProviderContract.Dependency.CONTENT_PATH);
+                        + InventoryProviderContract.ProductViewEntry.CONTENT_PATH);
             case DEPENDENCY:
                 return ("vnd.android.cursor.dir/vnd." + InventoryProviderContract.AUTHORITY + "/"
                         + InventoryProviderContract.Dependency.CONTENT_PATH);
@@ -114,10 +124,10 @@ public class InventoryProvider extends ContentProvider {
                         + InventoryProviderContract.Dependency.CONTENT_PATH);
             case SECTOR:
                 return ("vnd.android.cursor.dir/vnd." + InventoryProviderContract.AUTHORITY + "/"
-                        + InventoryProviderContract.Dependency.CONTENT_PATH);
+                        + InventoryProviderContract.Sector.CONTENT_PATH);
             case SECTOR_ID:
                 return ("vnd.android.cursor.item/vnd." + InventoryProviderContract.AUTHORITY + "/"
-                        + InventoryProviderContract.Dependency.CONTENT_PATH);
+                        + InventoryProviderContract.Sector.CONTENT_PATH);
             case UriMatcher.NO_MATCH:
                 throw new IllegalArgumentException("Invalid uri: " + uri);
         }

@@ -122,4 +122,9 @@ public class DependencyDaoImpl implements DependencyDao {
         return contentValues;
     }
 
+    @Override
+    public Dependency search(int id) {
+        return null;
+    }
+
 }

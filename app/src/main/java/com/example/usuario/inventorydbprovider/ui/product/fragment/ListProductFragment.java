@@ -9,26 +9,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.example.usuario.inventorydbprovider.R;
 import com.example.usuario.inventorydbprovider.adapter.ProductAdapter;
 import com.example.usuario.inventorydbprovider.data.db.model.ProductView;
 import com.example.usuario.inventorydbprovider.data.db.repository.ProductRepository;
-import com.example.usuario.inventorydbprovider.ui.product.contract.ProductListContract;
-import com.example.usuario.inventorydbprovider.ui.product.presenter.ProductListPresenter;
+import com.example.usuario.inventorydbprovider.ui.product.ProductActivity;
+import com.example.usuario.inventorydbprovider.ui.product.contract.ListProductContract;
+import com.example.usuario.inventorydbprovider.ui.product.presenter.ListProductPresenter;
 
 import java.util.ArrayList;
 
-/**
- * Created by icenri on 2/1/18.
- */
 
-public class ProductListFragment extends ListFragment implements ProductListContract.View {
-    public static final String TAG = "ProductListFragment";
+public class ListProductFragment extends ListFragment implements ListProductContract.View {
+    public static final String TAG = "ListProductFragment";
     private ProductAdapter adapter;
-    private ProductListFragment.OnProductSelectedListener callback;
-    private ProductListContract.Presenter presenter;
+    private ListProductFragment.OnProductSelectedListener callback;
+    private ListProductContract.Presenter presenter;
 
 
     @Override
@@ -46,13 +43,12 @@ public class ProductListFragment extends ListFragment implements ProductListCont
         super.onCreate(savedInstanceState);
         this.adapter = new ProductAdapter(getActivity());
         setRetainInstance(true);
-        setPresenter(new ProductListPresenter(this));
+        setPresenter(new ListProductPresenter(this));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list_product, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_list_product, container, false);
     }
 
     @Override
@@ -70,10 +66,16 @@ public class ProductListFragment extends ListFragment implements ProductListCont
                 callback.viewProduct(bundle);
             }
         });
+        ((ProductActivity) getActivity()).fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callback.viewProduct(null);
+            }
+        });
     }
 
     @Override
-    public void setPresenter(ProductListContract.Presenter presenter) {
+    public void setPresenter(ListProductContract.Presenter presenter) {
         this.presenter = presenter;
     }
 
