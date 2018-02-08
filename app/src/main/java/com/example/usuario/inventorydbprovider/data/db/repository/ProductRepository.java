@@ -1,9 +1,10 @@
 package com.example.usuario.inventorydbprovider.data.db.repository;
 
-import com.example.usuario.inventorydbprovider.data.db.dao.ProductDao;
+import com.example.usuario.inventorydbprovider.data.db.ProductDao;
 import com.example.usuario.inventorydbprovider.data.db.dao.ProductViewDao;
 import com.example.usuario.inventorydbprovider.data.db.model.Product;
 import com.example.usuario.inventorydbprovider.data.db.model.ProductView;
+import com.example.usuario.inventorydbprovider.data.provider.dao.ProductDaoImpl;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class ProductRepository {
     private ProductViewDao productViewDao;
 
     private ProductRepository() {
-        productDao = new ProductDao();
+        productDao = new ProductDaoImpl();
         productViewDao = new ProductViewDao();
     }
 

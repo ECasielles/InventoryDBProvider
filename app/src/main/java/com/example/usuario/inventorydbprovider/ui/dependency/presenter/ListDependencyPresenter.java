@@ -4,7 +4,6 @@ import com.example.usuario.inventorydbprovider.data.db.model.Dependency;
 import com.example.usuario.inventorydbprovider.ui.dependency.contract.ListDependencyContract;
 import com.example.usuario.inventorydbprovider.ui.dependency.interactor.ListDependencyInteractor;
 import com.example.usuario.inventorydbprovider.ui.dependency.interactor.ListDependencyInteractorImpl;
-import com.example.usuario.inventorydbprovider.utils.Error;
 
 import java.util.HashMap;
 import java.util.List;
@@ -49,7 +48,7 @@ public class ListDependencyPresenter implements ListDependencyContract.Presenter
     }
 
     @Override
-    public void onDatabaseError(Error error) {
+    public void onDatabaseError(Throwable error) {
         view.showMessage(error.getMessage());
     }
 

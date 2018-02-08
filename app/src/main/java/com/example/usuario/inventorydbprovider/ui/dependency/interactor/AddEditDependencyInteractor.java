@@ -1,7 +1,6 @@
 package com.example.usuario.inventorydbprovider.ui.dependency.interactor;
 
 import com.example.usuario.inventorydbprovider.data.db.model.Dependency;
-import com.example.usuario.inventorydbprovider.utils.Error;
 
 /**
  * Created by usuario on 24/11/17.
@@ -22,7 +21,7 @@ public interface AddEditDependencyInteractor extends DependencyCallback {
         void onDescriptionEmptyError();
 
         void onSuccess();
-        void onDatabaseError(Error error);
+        void onDatabaseError(Throwable error);
     }
 
 }

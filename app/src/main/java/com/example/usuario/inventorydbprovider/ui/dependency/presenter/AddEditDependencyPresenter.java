@@ -4,7 +4,6 @@ import com.example.usuario.inventorydbprovider.data.db.model.Dependency;
 import com.example.usuario.inventorydbprovider.ui.dependency.contract.AddEditDependencyContract;
 import com.example.usuario.inventorydbprovider.ui.dependency.interactor.AddEditDependencyInteractor;
 import com.example.usuario.inventorydbprovider.ui.dependency.interactor.AddEditDependencyInteractorImpl;
-import com.example.usuario.inventorydbprovider.utils.Error;
 
 /**
  * Created by usuario on 23/11/17.
@@ -55,7 +54,7 @@ public class AddEditDependencyPresenter implements AddEditDependencyContract.Pre
         view.navigateToListDependency();
     }
     @Override
-    public void onDatabaseError(Error error) {
+    public void onDatabaseError(Throwable error) {
         view.setDatabaseError(error.getMessage());
     }
 

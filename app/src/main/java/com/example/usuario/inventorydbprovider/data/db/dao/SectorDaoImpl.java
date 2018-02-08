@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.usuario.inventorydbprovider.data.db.InventoryContract;
 import com.example.usuario.inventorydbprovider.data.db.InventoryOpenHelper;
+import com.example.usuario.inventorydbprovider.data.db.SectorDao;
 import com.example.usuario.inventorydbprovider.data.db.model.Sector;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by usuario on 25/01/18.
  */
-public class SectorDao {
+public class SectorDaoImpl implements SectorDao {
 
     public ArrayList<Sector> loadAll() {
         ArrayList<Sector> sectors = new ArrayList<>();
@@ -58,6 +59,16 @@ public class SectorDao {
         return id;
     }
 
+    @Override
+    public int delete(Sector sector) {
+        return 0;
+    }
+
+    @Override
+    public boolean exists(Sector sector) {
+        return false;
+    }
+
     public int update(Sector sector) {
         SQLiteDatabase sqLiteDatabase = InventoryOpenHelper.getInstance().openDatabase();
         String[] whereArgs = new String[]{"" + sector.getID()};
@@ -72,7 +83,7 @@ public class SectorDao {
 
     }
 
-    private ContentValues createContent(Sector sector) {
+    public ContentValues createContent(Sector sector) {
         //ContentValues funciona como un mapa
         ContentValues contentValues = new ContentValues();
         contentValues.put(InventoryContract.SectorEntry.COLUMN_DEPENDENCY_ID, sector.getDependencyId());

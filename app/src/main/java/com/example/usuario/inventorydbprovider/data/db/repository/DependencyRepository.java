@@ -4,21 +4,20 @@ import com.example.usuario.inventorydbprovider.data.db.DependencyDao;
 import com.example.usuario.inventorydbprovider.data.db.model.Dependency;
 import com.example.usuario.inventorydbprovider.data.provider.dao.DependencyDaoImpl;
 import com.example.usuario.inventorydbprovider.ui.dependency.interactor.DependencyCallback;
-import com.example.usuario.inventorydbprovider.utils.Error;
 
 import java.util.ArrayList;
 
 /**
- * Caché de datos de Dependency. Extrae los datos de conexión con BD
- * y con servicio web.
+ * Gestor de datos de Dependency. Extrae los datos
+ * de distintos orígenes de datos.
  *
  * @author Enrique Casielles Lapeira
  * @version 3.0
  * @see ArrayList
  * @see Dependency
+ * @see DependencyDao
  */
 
-//Falta una interfaz común a todos los interactor
 public class DependencyRepository {
 
     private static DependencyRepository dependencyRepository;
@@ -27,12 +26,12 @@ public class DependencyRepository {
         dependencyRepository = new DependencyRepository();
     }
 
-    //Si hubiera una conexión, habría un dependencyWebService
+    //Si hubiera una conexión, habría un dependencyDaoWebService, etc.
     private DependencyDao dependencyDao;
 
 
     private DependencyRepository() {
-        //IMPORTANTE: ESTAMOS IMPORTANDO DE PROVIDER
+        //IMPORTANTE: ESTAMOS IMPORTANDO DE PROVIDER (DependencyDaoImpl)
         dependencyDao = new DependencyDaoImpl();
     }
 

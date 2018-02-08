@@ -1,7 +1,6 @@
 package com.example.usuario.inventorydbprovider.ui.dependency.interactor;
 
 import com.example.usuario.inventorydbprovider.data.db.model.Dependency;
-import com.example.usuario.inventorydbprovider.utils.Error;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ public interface ListDependencyInteractor extends DependencyCallback {
     interface OnLoadFinishedListener {
         void onDependencyDeleted();
         void onDependenciesLoaded(List<Dependency> dependencies);
-        void onDatabaseError(Error error);
+        void onDatabaseError(Throwable error);
     }
 
 }

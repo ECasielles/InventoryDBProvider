@@ -1,7 +1,8 @@
 package com.example.usuario.inventorydbprovider.data.db.repository;
 
-import com.example.usuario.inventorydbprovider.data.db.dao.SectorDao;
+import com.example.usuario.inventorydbprovider.data.db.SectorDao;
 import com.example.usuario.inventorydbprovider.data.db.model.Sector;
+import com.example.usuario.inventorydbprovider.data.provider.dao.SectorDaoImpl;
 import com.example.usuario.inventorydbprovider.ui.sector.SectorRepositoryCallback;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class SectorRepository {
     private SectorDao sectorDao;
 
     private SectorRepository() {
-        sectorDao = new SectorDao();
+        sectorDao = new SectorDaoImpl();
     }
 
     public static SectorRepository getInstance(){

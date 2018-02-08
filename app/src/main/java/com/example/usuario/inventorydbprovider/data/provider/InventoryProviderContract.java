@@ -14,7 +14,7 @@ import java.util.HashMap;
 public final class InventoryProviderContract {
 
     //debemos crear un atributo projection siempre que haya un inner join.
-    public static final String AUTHORITY = "com.example.inventorydbprovider";
+    public static final String AUTHORITY = "com.example.usuario.inventorydbprovider";
     public static final Uri AUTHORITY_URI = Uri.parse("content://" + AUTHORITY);
 
     private InventoryProviderContract(){}

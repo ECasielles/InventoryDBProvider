@@ -51,7 +51,7 @@ public class ListDependencyInteractorImpl implements ListDependencyInteractor {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                Thread.sleep(10000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
