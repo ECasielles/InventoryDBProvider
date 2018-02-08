@@ -1,13 +1,13 @@
 package com.example.usuario.inventorydbprovider.data.db.dao;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.provider.BaseColumns;
 import android.util.Log;
 
-import com.example.usuario.inventorydbprovider.data.db.InventoryContract;
-import com.example.usuario.inventorydbprovider.data.db.InventoryOpenHelper;
+import com.example.usuario.inventorydbprovider.data.db.*;
 import com.example.usuario.inventorydbprovider.data.db.model.Product;
 import com.example.usuario.inventorydbprovider.data.db.model.ProductView;
 
@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Created by usuario on 2/02/18.
  */
 
-public class ProductViewDao {
+public class ProductViewDaoImpl implements ProductDao {
 
     public ArrayList<ProductView> loadAll() {
         ArrayList<ProductView> productViews = new ArrayList<>();
@@ -59,6 +59,31 @@ public class ProductViewDao {
         return productViews;
     }
 
+    @Override
+    public long add(Product product) {
+        return 0;
+    }
+
+    @Override
+    public int delete(Product product) {
+        return 0;
+    }
+
+    @Override
+    public boolean exists(Product product) {
+        return false;
+    }
+
+    @Override
+    public int update(Product product) {
+        return 0;
+    }
+
+    @Override
+    public ContentValues createContent(Product product) {
+        return null;
+    }
+
     public ProductView search(int id) {
         SQLiteDatabase database = InventoryOpenHelper.getInstance().openDatabase();
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
@@ -69,7 +94,7 @@ public class ProductViewDao {
         queryBuilder.setTables(InventoryContract.ProductViewEntry.PRODUCT_INNER);
         queryBuilder.setProjectionMap(InventoryContract.ProductViewEntry.sProductViewProjectionMap);
 
-        Log.i("ProductViewDao", queryBuilder.buildQuery(
+        Log.i("ProductViewDaoImpl", queryBuilder.buildQuery(
                 InventoryContract.ProductViewEntry.ALL_COLUMNS,
                 null, null, null, null, null));
 
@@ -105,4 +130,6 @@ public class ProductViewDao {
         InventoryOpenHelper.getInstance().closeDatabase();
         return productView;
     }
+
+
 }

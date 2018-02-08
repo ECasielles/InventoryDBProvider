@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.usuario.inventorydbprovider.data.db.InventoryContract;
 import com.example.usuario.inventorydbprovider.data.db.InventoryOpenHelper;
-import com.example.usuario.inventorydbprovider.data.db.ProductDao;
 import com.example.usuario.inventorydbprovider.data.db.model.Product;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
  * Created by icenri on 2/1/18.
  */
 
-public class ProductDaoImpl implements ProductDao {
+public class ProductDaoImpl {
 
     public ArrayList<Product> loadAll() {
         ArrayList<Product> products = new ArrayList<>();
@@ -55,26 +54,6 @@ public class ProductDaoImpl implements ProductDao {
         cursor.close();
         InventoryOpenHelper.getInstance().closeDatabase();
         return products;
-    }
-
-    @Override
-    public long add(Product product) {
-        return 0;
-    }
-
-    @Override
-    public int delete(Product product) {
-        return 0;
-    }
-
-    @Override
-    public boolean exists(Product product) {
-        return false;
-    }
-
-    @Override
-    public int update(Product product) {
-        return 0;
     }
 
     /**
@@ -149,4 +128,5 @@ public class ProductDaoImpl implements ProductDao {
         contentValues.put(InventoryContract.ProductEntry.COLUMN_NOTES, product.getNotes());
         return contentValues;
     }
+
 }

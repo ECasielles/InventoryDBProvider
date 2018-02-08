@@ -1,6 +1,5 @@
 package com.example.usuario.inventorydbprovider.data.provider.dao;
 
-import android.content.ContentProvider;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -13,9 +12,6 @@ import com.example.usuario.inventorydbprovider.data.provider.InventoryProviderCo
 
 import java.util.ArrayList;
 
-/**
- * Created by usuario on 7/02/18.
- */
 
 public class DependencyDaoImpl implements DependencyDao {
 
@@ -42,7 +38,7 @@ public class DependencyDaoImpl implements DependencyDao {
                 projection, null, null, null);
 
         //3: Lee los datos y los devuelve
-        if(cursor.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) {
             do {
                 dependencies.add(new Dependency(
                         cursor.getInt(0),
@@ -66,22 +62,55 @@ public class DependencyDaoImpl implements DependencyDao {
 
     @Override
     public int delete(Dependency dependency) {
-        return 0;
+        ContentResolver resolver = InventoryApplication.getContext().getContentResolver();
+        String selection = InventoryProviderContract.Dependency._ID + " = ? ";
+        String[] selectionArgs = new String[]{String.valueOf(dependency.get_ID())};
+        Uri uri = InventoryProviderContract.Dependency.CONTENT_URI;
+        return resolver.delete(uri, selection, selectionArgs);
     }
 
     @Override
     public boolean exists(Dependency dependency) {
-        return false;
+        Dependency tempDependency = null;
+
+        String[] projection = new String[] {
+                InventoryProviderContract.Dependency._ID,
+                InventoryProviderContract.Dependency.NAME,
+                InventoryProviderContract.Dependency.SHORTNAME,
+                InventoryProviderContract.Dependency.DESCRIPTION,
+                InventoryProviderContract.Dependency.IMAGENAME
+        };
+
+        String selection = InventoryProviderContract.Dependency.NAME + " = ? " +
+                InventoryProviderContract.Dependency.SHORTNAME + " = ? ";
+        String[] selectionArgs = new String[]{dependency.getName(), dependency.getShortname()};
+
+        ContentResolver resolver = InventoryApplication.getContext().getContentResolver();
+        Cursor cursor = resolver.query(InventoryProviderContract.Dependency.CONTENT_URI,
+                projection, selection, selectionArgs, null);
+
+        if(cursor != null && cursor.moveToFirst()) {
+            do {
+                tempDependency = new Dependency(
+                        cursor.getInt(0),
+                        cursor.getString(1), cursor.getString(2),
+                        cursor.getString(3), cursor.getString(4));
+            } while (cursor.moveToNext());
+        }
+        return tempDependency != null;
     }
 
     @Override
     public int update(Dependency dependency) {
-        return 0;
+        ContentResolver resolver = InventoryApplication.getContext().getContentResolver();
+        String selection = InventoryProviderContract.Dependency._ID + " = ? ";
+        String[] selectionArgs = new String[]{String.valueOf(dependency.get_ID())};
+        Uri uri = InventoryProviderContract.Dependency.CONTENT_URI;
+        return resolver.update(uri, createContent(dependency), selection, selectionArgs);
     }
 
     @Override
     public ContentValues createContent(Dependency dependency) {
-        //ContentValues funciona como un mapa
         ContentValues contentValues = new ContentValues();
         contentValues.put(InventoryProviderContract.Dependency.NAME, dependency.getName());
         contentValues.put(InventoryProviderContract.Dependency.SHORTNAME, dependency.getShortname());
@@ -91,3 +120,4 @@ public class DependencyDaoImpl implements DependencyDao {
     }
 
 }
+

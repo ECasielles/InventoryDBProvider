@@ -27,7 +27,7 @@ public class AddEditDependencyInteractorImpl implements AddEditDependencyInterac
             listener.onShortNameLengthError();
         else if (description.isEmpty())
             listener.onDescriptionEmptyError();
-        else if (DependencyRepository.getInstance().exists(dependency))
+        else if (!DependencyRepository.getInstance().exists(dependency))
             addDependency(name, shortname, description, imageName);
     }
 
