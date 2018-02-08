@@ -17,9 +17,6 @@ import com.example.usuario.inventorydbprovider.ui.product.contract.ViewProductCo
 import com.example.usuario.inventorydbprovider.ui.product.presenter.ViewProductPresenter;
 import com.example.usuario.inventorydbprovider.utils.AddEdit;
 
-/**
- * Created by icenri on 1/31/18.
- */
 
 public class ViewProductFragment extends Fragment implements ViewProductContract.View {
     public static final String TAG = "ViewProductFragment";
