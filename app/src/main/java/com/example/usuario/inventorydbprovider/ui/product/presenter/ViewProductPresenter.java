@@ -19,13 +19,22 @@ public class ViewProductPresenter implements ViewProductContract.Presenter,
 
     @Override
     public void saveProduct(Product product) {
-
+        interactor.saveProduct(product);
     }
 
     @Override
     public void updateProduct(Product product) {
-
+        interactor.updateProduct(product);
     }
 
 
+    @Override
+    public void onProductLoaded() {
+        view.productLoaded();
+    }
+
+    @Override
+    public void onProductLoadError(Throwable throwable) {
+        view.onLoadError(throwable);
+    }
 }

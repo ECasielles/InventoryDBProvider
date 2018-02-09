@@ -36,19 +36,18 @@ public class ProductRepository {
         if (productDao.add(product) != -1)
             callback.onSuccess();
         else
-            callback.onError(new Throwable());
+            callback.onError(new Throwable("Fallo al añadir"));
     }
 
-    public void updateProduct(Product product, SectorCallback callback) {
+    public void updateProduct(Product product, ProductCallback callback) {
         if (productDao.update(product) != 0)
             callback.onSuccess();
         else
             callback.onError(new Throwable());
     }
 
-    public void deleteProduct(Product product, SectorCallback callback) {
-        int result = productDao.delete(product);
-        if (result != 0)
+    public void deleteProduct(Product product, ProductCallback callback) {
+        if (productDao.delete(product) != 0)
             callback.onSuccess();
         else
             callback.onError(new Throwable());

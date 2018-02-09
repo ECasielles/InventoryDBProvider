@@ -17,7 +17,8 @@ import com.example.usuario.inventorydbprovider.ui.product.fragment.ViewProductFr
  * @see android.app.Activity
  * @see AppCompatActivity
  */
-public class ProductActivity extends AppCompatActivity implements ListProductFragment.OnProductSelectedListener {
+public class ProductActivity extends AppCompatActivity implements ListProductFragment.OnProductSelectedListener,
+    ViewProductFragment.OnProductLoadListener {
 
     ViewProductFragment viewProductFragment;
     ListProductFragment listProductFragment;
@@ -58,6 +59,9 @@ public class ProductActivity extends AppCompatActivity implements ListProductFra
         }
     }
 
-    //TODO: Interfaz reload
+    @Override
+    public void loadListProduct() {
+        getSupportFragmentManager().popBackStack();
+    }
 
 }

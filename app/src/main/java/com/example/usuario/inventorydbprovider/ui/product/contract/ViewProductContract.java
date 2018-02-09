@@ -10,11 +10,12 @@ public interface ViewProductContract {
 
     interface View {
         void setPresenter(ViewProductContract.Presenter presenter);
+        void productLoaded();
+        void onLoadError(Throwable throwable);
     }
 
     interface Presenter {
         void saveProduct(Product product);
-
         void updateProduct(Product product);
     }
 

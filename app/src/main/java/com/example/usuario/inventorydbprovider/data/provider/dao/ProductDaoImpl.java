@@ -83,7 +83,8 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public long add(Product product) {
         ContentResolver resolver = InventoryApplication.getContext().getContentResolver();
-        Uri uri = resolver.insert(InventoryProviderContract.ProductViewEntry.CONTENT_URI, createContent(product));
+        Uri uri = InventoryProviderContract.ProductViewEntry.CONTENT_URI;
+        uri = resolver.insert(uri, createContent(product));
         if(uri == null)
             return -1;
         return Long.parseLong(uri.getLastPathSegment());
@@ -231,7 +232,6 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public ContentValues createContent(Product product) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(InventoryProviderContract.ProductViewEntry._ID, product.get_ID());
         contentValues.put(InventoryProviderContract.ProductViewEntry.SERIAL, product.getSerial());
         contentValues.put(InventoryProviderContract.ProductViewEntry.MODELCODE, product.getModelCode());
         contentValues.put(InventoryProviderContract.ProductViewEntry.SHORTNAME, product.getShortname());

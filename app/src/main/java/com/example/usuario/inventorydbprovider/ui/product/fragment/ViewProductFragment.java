@@ -1,13 +1,18 @@
 package com.example.usuario.inventorydbprovider.ui.product.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DialogTitle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.usuario.inventorydbprovider.R;
 import com.example.usuario.inventorydbprovider.data.db.model.Product;
@@ -21,10 +26,29 @@ import com.example.usuario.inventorydbprovider.utils.AddEdit;
 public class ViewProductFragment extends Fragment implements ViewProductContract.View {
     public static final String TAG = "ViewProductFragment";
 
-    private EditText edtShortname, edtSerial, edtVendor, edtModelcode, edtDescription, edtPrice, edtDatePurchase, edtUrl, edtNotes;
+    private EditText edtShortname, edtSerial, edtVendor, edtModelcode, edtDescription,
+            edtPrice, edtDatePurchase, edtUrl, edtNotes;
     private TextView txvCategory, txvProductClass, txvSectorName;
     private ViewProductContract.Presenter presenter;
     private AddEdit addEditMode;
+    private ViewProductFragment.OnProductLoadListener callback;
+
+    public static ViewProductFragment getNewInstance(Bundle args) {
+        ViewProductFragment viewProductFragment = new ViewProductFragment();
+        if(args != null)
+            viewProductFragment.setArguments(args);
+        return viewProductFragment;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            callback = (OnProductLoadListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity + " must implement OnCreateContextMenuListener");
+        }
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,30 +101,37 @@ public class ViewProductFragment extends Fragment implements ViewProductContract
         ((ProductActivity) getActivity()).fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Product product = new Product(
-                        -1,
-                        edtSerial.getText().toString(),
-                        edtModelcode.getText().toString(),
-                        edtShortname.getText().toString(),
-                        edtDescription.getText().toString(),
-                        1,1,1,1,
-                        Float.parseFloat(edtPrice.getText().toString()),
-                        edtVendor.getText().toString(),
-                        -1, "sin imagen",
-                        edtDatePurchase.getText().toString(),
-                        edtUrl.getText().toString(),
-                        edtNotes.getText().toString()
-                );
-                if(addEditMode.getMode() == AddEdit.ADD_MODE)
-                    presenter.saveProduct(product);
-                if(addEditMode.getMode() == AddEdit.EDIT_MODE){
-                    ProductView productView = getArguments().getParcelable(ProductView.TAG);
-                    product.setId(productView.get_ID());
-                    product.setCategory(productView.getCategory());
-                    product.setProductClass(productView.getProductClass());
-                    product.setSectorID(productView.getSectorID());
-                    product.setQuantity(productView.getQuantity());
-                    presenter.updateProduct(product);
+                try {
+                    float value = Float.parseFloat(edtPrice.getText().toString());
+                    Product product = new Product(
+                            -1,
+                            edtSerial.getText().toString(),
+                            edtModelcode.getText().toString(),
+                            edtShortname.getText().toString(),
+                            edtDescription.getText().toString(),
+                            1,1,1,1,
+                            value,
+                            edtVendor.getText().toString(),
+                            -1, "sin imagen",
+                            edtDatePurchase.getText().toString(),
+                            edtUrl.getText().toString(),
+                            edtNotes.getText().toString()
+                    );
+                    if(addEditMode.getMode() == AddEdit.ADD_MODE)
+                        presenter.saveProduct(product);
+                    if(addEditMode.getMode() == AddEdit.EDIT_MODE){
+                        ProductView productView = getArguments().getParcelable(ProductView.TAG);
+                        if(productView != null) {
+                            product.setId(productView.get_ID());
+                            product.setCategory(productView.getCategory());
+                            product.setProductClass(productView.getProductClass());
+                            product.setSectorID(productView.getSectorID());
+                            product.setQuantity(productView.getQuantity());
+                            presenter.updateProduct(product);
+                        }
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), "Valor de producto no válido", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -109,6 +140,21 @@ public class ViewProductFragment extends Fragment implements ViewProductContract
     @Override
     public void setPresenter(ViewProductContract.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    @Override
+    public void productLoaded() {
+        callback.loadListProduct();
+    }
+
+    @Override
+    public void onLoadError(Throwable throwable) {
+        if(throwable != null)
+            Toast.makeText(getContext(), "Error de BD: " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+    }
+
+    public interface OnProductLoadListener {
+        void loadListProduct();
     }
 
 }

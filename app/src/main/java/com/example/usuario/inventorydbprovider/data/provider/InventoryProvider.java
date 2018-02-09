@@ -67,11 +67,11 @@ public class InventoryProvider extends ContentProvider {
         //Switch obligatorio. Están todas las peticiones de datos.
         switch (uriMatcher.match(uri)) {
             case PRODUCT:
-                cursor = database.query(InventoryContract.ProductViewEntry.TABLE_NAME, projection,
+                cursor = database.query(InventoryContract.ProductEntry.TABLE_NAME, projection,
                         selection, selectionArgs, null, null, null);
                 break;
             case PRODUCT_ID:
-                cursor = database.query(InventoryContract.ProductViewEntry.TABLE_NAME, projection,
+                cursor = database.query(InventoryContract.ProductEntry.TABLE_NAME, projection,
                         selection, selectionArgs, null, null, null);
                 break;
             case DEPENDENCY:

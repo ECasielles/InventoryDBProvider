@@ -5,8 +5,8 @@ package com.example.usuario.inventorydbprovider.ui.product.interactor;
  */
 
 public interface ProductCallback {
-    void onSuccess();
 
+    void onSuccess();
     void onError(Throwable throwable);
 
 }
