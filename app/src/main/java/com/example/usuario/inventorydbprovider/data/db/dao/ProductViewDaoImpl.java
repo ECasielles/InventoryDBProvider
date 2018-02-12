@@ -70,11 +70,6 @@ public class ProductViewDaoImpl implements ProductDao {
     }
 
     @Override
-    public boolean exists(Product product) {
-        return false;
-    }
-
-    @Override
     public int update(Product product) {
         return 0;
     }

@@ -47,6 +47,7 @@
     <string name="btnCancel" translatable="false">Cancelar</string>
     <string name="dependency_deleted" translatable="false">Dependencia eliminada</string>
     <string name="error_db_not_found">No se ha encontrador el elemento</string>
+    <string name="action_fragment_list_product_delete">Eliminar producto</string>
 
 
 </resources>

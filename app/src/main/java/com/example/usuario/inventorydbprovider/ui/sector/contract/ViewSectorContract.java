@@ -11,6 +11,7 @@ public interface ViewSectorContract {
     interface View {
         void setPresenter(ViewSectorContract.Presenter presenter);
         void onSectorsUpdated();
+        void onSectorUpdateError(Throwable throwable);
     }
 
     interface Presenter {

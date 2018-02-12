@@ -30,4 +30,9 @@ public class ViewSectorPresenter implements ViewSectorContract.Presenter, ViewSe
         view.onSectorsUpdated();
     }
 
+    @Override
+    public void onSectorUpdateError(Throwable throwable) {
+        view.onSectorUpdateError(throwable);
+    }
+
 }

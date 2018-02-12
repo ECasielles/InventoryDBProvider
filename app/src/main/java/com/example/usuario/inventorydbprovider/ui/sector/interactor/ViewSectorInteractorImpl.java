@@ -26,7 +26,7 @@ public class ViewSectorInteractorImpl implements ViewSectorInteractor {
 
     @Override
     public void onError(Throwable throwable) {
-
+        listener.onSectorUpdateError(throwable);
     }
 
     @Override

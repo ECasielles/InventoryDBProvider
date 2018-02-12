@@ -14,6 +14,7 @@ public interface ViewSectorInteractor extends SectorCallback {
 
     interface OnSectorsUpdatedListener {
         void onSectorsUpdated();
+        void onSectorUpdateError(Throwable throwable);
     }
 
 }

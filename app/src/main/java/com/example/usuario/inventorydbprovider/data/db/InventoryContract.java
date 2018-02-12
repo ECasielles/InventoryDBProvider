@@ -10,7 +10,7 @@ import java.util.HashMap;
  */
 public final class InventoryContract {
 
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Inventory.db";
     //Constructor privado para que no sea instanciada
     private InventoryContract() { }

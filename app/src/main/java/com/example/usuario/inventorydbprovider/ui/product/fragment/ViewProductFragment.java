@@ -2,11 +2,8 @@ package com.example.usuario.inventorydbprovider.ui.product.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Debug;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DialogTitle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,8 +110,8 @@ public class ViewProductFragment extends Fragment implements ViewProductContract
                             value,
                             edtVendor.getText().toString(),
                             -1, "sin imagen",
-                            edtDatePurchase.getText().toString(),
                             edtUrl.getText().toString(),
+                            edtDatePurchase.getText().toString(),
                             edtNotes.getText().toString()
                     );
                     if(addEditMode.getMode() == AddEdit.ADD_MODE)

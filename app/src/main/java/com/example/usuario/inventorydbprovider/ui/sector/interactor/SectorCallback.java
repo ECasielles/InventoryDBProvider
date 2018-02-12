@@ -5,8 +5,8 @@ package com.example.usuario.inventorydbprovider.ui.sector.interactor;
  */
 
 public interface SectorCallback {
-    void onError(Throwable throwable);
 
+    void onError(Throwable throwable);
     void onSuccess();
 
 }

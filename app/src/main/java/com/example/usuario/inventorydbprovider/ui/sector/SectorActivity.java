@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
 
 import com.example.usuario.inventorydbprovider.R;
 import com.example.usuario.inventorydbprovider.ui.sector.fragment.ListSectorFragment;
@@ -41,16 +39,9 @@ public class SectorActivity extends AppCompatActivity implements ListSectorFragm
             listSectorFragment = new ListSectorFragment();
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.activity_sector, listSectorFragment, ListSectorFragment.TAG)
+                    .add(R.id.frame_content, listSectorFragment, ListSectorFragment.TAG)
                     .commit();
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_activity_sector, menu);
-        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -60,16 +51,15 @@ public class SectorActivity extends AppCompatActivity implements ListSectorFragm
             viewSectorFragment = ViewSectorFragment.newInstance(bundle);
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.activity_sector, viewSectorFragment, ViewSectorFragment.TAG)
-                    .addToBackStack(ViewSectorFragment.TAG)
+                    .addToBackStack(null)
+                    .replace(R.id.frame_content, viewSectorFragment, ViewSectorFragment.TAG)
                     .commit();
         }
     }
 
     @Override
     public void onSectorsUpdated() {
-        if (viewSectorFragment != null)
-            getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager().popBackStack();
     }
 
 }

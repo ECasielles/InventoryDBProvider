@@ -23,8 +23,24 @@ public class ListSectorPresenter implements ListSectorContract.Presenter, ListSe
     }
 
     @Override
+    public void deleteSector(Sector sector) {
+        interactor.deleteSector(sector);
+    }
+
+    @Override
     public void onSectorsLoaded(ArrayList<Sector> sectors) {
         view.showSectors(sectors);
+    }
+
+    @Override
+    public void onSectorDeleteError(Throwable throwable) {
+        view.onDatabaseError(throwable);
+    }
+
+    @Override
+    public void onSectorDeleted() {
+        loadSectors();
+        view.onSectorDeleted();
     }
 
 }

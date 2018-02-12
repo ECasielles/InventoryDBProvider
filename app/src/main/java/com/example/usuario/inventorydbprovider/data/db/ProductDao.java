@@ -15,7 +15,6 @@ public interface ProductDao {
     ArrayList<ProductView> loadAll();
     long add(Product product);
     int delete(Product product);
-    boolean exists(Product product);
     int update(Product product);
     ContentValues createContent(Product product);
     ProductView search(int id);

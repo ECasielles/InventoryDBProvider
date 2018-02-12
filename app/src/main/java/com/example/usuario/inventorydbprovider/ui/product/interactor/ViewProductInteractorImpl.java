@@ -34,4 +34,5 @@ public class ViewProductInteractorImpl implements ViewProductInteractor {
     public void onError(Throwable throwable) {
         listener.onProductLoadError(throwable);
     }
+
 }

@@ -73,10 +73,16 @@ public class DependencyDaoImpl implements DependencyDao {
     @Override
     public int delete(Dependency dependency) {
         ContentResolver resolver = InventoryApplication.getContext().getContentResolver();
-        String selection = InventoryProviderContract.Dependency._ID + " = ? ";
+        String where = InventoryProviderContract.Dependency._ID + " = ? AND " +
+                InventoryProviderContract.Sector.CONTENT_PATH + "." +
+                InventoryProviderContract.Sector.DEPENDENCYID + " NOT IN (SELECT " +
+                InventoryProviderContract.Dependency.CONTENT_PATH + "." +
+                InventoryProviderContract.Dependency._ID + " FROM " +
+                InventoryProviderContract.Dependency.CONTENT_PATH + ")"
+        ;
         String[] selectionArgs = new String[]{String.valueOf(dependency.get_ID())};
         Uri uri = InventoryProviderContract.Dependency.CONTENT_URI;
-        return resolver.delete(uri, selection, selectionArgs);
+        return resolver.delete(uri, where, selectionArgs);
     }
 
     @Override

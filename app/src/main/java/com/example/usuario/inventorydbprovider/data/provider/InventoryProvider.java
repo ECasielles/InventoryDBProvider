@@ -36,9 +36,9 @@ public class InventoryProvider extends ContentProvider {
     //IMPORTANTE: # solo para id, content_path de cada product
     static {
         uriMatcher.addURI(InventoryProviderContract.AUTHORITY,
-                InventoryProviderContract.ProductViewEntry.CONTENT_PATH, PRODUCT);
+                InventoryProviderContract.Product.CONTENT_PATH, PRODUCT);
         uriMatcher.addURI(InventoryProviderContract.AUTHORITY,
-                InventoryProviderContract.ProductViewEntry.CONTENT_PATH + "/#", PRODUCT_ID);
+                InventoryProviderContract.Product.CONTENT_PATH + "/#", PRODUCT_ID);
         uriMatcher.addURI(InventoryProviderContract.AUTHORITY,
                 InventoryProviderContract.Dependency.CONTENT_PATH, DEPENDENCY);
         uriMatcher.addURI(InventoryProviderContract.AUTHORITY,
@@ -48,7 +48,7 @@ public class InventoryProvider extends ContentProvider {
         uriMatcher.addURI(InventoryProviderContract.AUTHORITY,
                 InventoryProviderContract.Sector.CONTENT_PATH + "/#", SECTOR_ID);
         uriMatcher.addURI(InventoryProviderContract.AUTHORITY,
-                InventoryProviderContract.ProductViewEntry.CONTENT_PATH, PRODUCT_VIEW);
+                InventoryProviderContract.Product.CONTENT_PATH_VIEW, PRODUCT_VIEW);
     }
 
 
@@ -93,7 +93,7 @@ public class InventoryProvider extends ContentProvider {
             case PRODUCT_VIEW:
                 SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
                 queryBuilder.setTables(InventoryContract.ProductViewEntry.PRODUCT_INNER);
-                queryBuilder.setProjectionMap(InventoryProviderContract.ProductViewEntry.sProductViewProjectionMap);
+                queryBuilder.setProjectionMap(InventoryProviderContract.Product.sProductViewProjectionMap);
                 cursor = queryBuilder.query(database, projection, selection, selectionArgs, null,
                         null, null);
                 break;
@@ -112,10 +112,10 @@ public class InventoryProvider extends ContentProvider {
         switch (uriMatcher.match(uri)) {
             case PRODUCT:
                 return ("vnd.android.cursor.dir/vnd." + InventoryProviderContract.AUTHORITY + "/"
-                        + InventoryProviderContract.ProductViewEntry.CONTENT_PATH);
+                        + InventoryProviderContract.Product.CONTENT_PATH);
             case PRODUCT_ID:
                 return ("vnd.android.cursor.item/vnd." + InventoryProviderContract.AUTHORITY + "/"
-                        + InventoryProviderContract.ProductViewEntry.CONTENT_PATH);
+                        + InventoryProviderContract.Product.CONTENT_PATH);
             case DEPENDENCY:
                 return ("vnd.android.cursor.dir/vnd." + InventoryProviderContract.AUTHORITY + "/"
                         + InventoryProviderContract.Dependency.CONTENT_PATH);
@@ -141,10 +141,10 @@ public class InventoryProvider extends ContentProvider {
         long rows;
         switch (uriMatcher.match(uri)) {
             case PRODUCT:
-                rows = database.insert(InventoryContract.ProductViewEntry.TABLE_NAME,
+                rows = database.insert(InventoryContract.ProductEntry.TABLE_NAME,
                         null, contentValues);
                 result = Uri.parse(InventoryProviderContract.AUTHORITY +
-                                InventoryProviderContract.ProductViewEntry.CONTENT_PATH + "/" + rows);
+                                InventoryProviderContract.Product.CONTENT_PATH + "/" + rows);
                 break;
             case DEPENDENCY:
                 rows = database.insert(InventoryContract.DependencyEntry.TABLE_NAME,
@@ -165,22 +165,21 @@ public class InventoryProvider extends ContentProvider {
         return result;
     }
 
-    //TODO: WhereClause toma el id de la uri
     @Override
     public int delete(@NonNull Uri uri, @Nullable String whereClause, @Nullable String[] whereArgs) {
         int result = -1;
         switch (uriMatcher.match(uri)) {
             case PRODUCT:
-                result = database.delete(InventoryContract.ProductViewEntry.TABLE_NAME,
-                        null, null);
+                result = database.delete(InventoryContract.ProductEntry.TABLE_NAME,
+                        whereClause, whereArgs);
                 break;
             case DEPENDENCY:
                 result = database.delete(InventoryContract.DependencyEntry.TABLE_NAME,
-                        null, null);
+                        whereClause, whereArgs);
                 break;
             case SECTOR:
                 result = database.delete(InventoryContract.SectorEntry.TABLE_NAME,
-                        null, null);
+                        whereClause, whereArgs);
                 break;
             case UriMatcher.NO_MATCH:
                 throw new IllegalArgumentException("Invalid uri: " + uri);
@@ -193,16 +192,16 @@ public class InventoryProvider extends ContentProvider {
         int result = -1;
         switch (uriMatcher.match(uri)) {
             case PRODUCT:
-                result = database.update(InventoryContract.ProductViewEntry.TABLE_NAME,
-                        contentValues, null, null);
+                result = database.update(InventoryContract.ProductEntry.TABLE_NAME,
+                        contentValues, whereClause, whereArgs);
                 break;
             case DEPENDENCY:
                 result = database.update(InventoryContract.DependencyEntry.TABLE_NAME,
-                        contentValues, null, null);
+                        contentValues, whereClause, whereArgs);
                 break;
             case SECTOR:
                 result = database.update(InventoryContract.SectorEntry.TABLE_NAME,
-                        contentValues, null, null);
+                        contentValues, whereClause, whereArgs);
                 break;
             case UriMatcher.NO_MATCH:
                 throw new IllegalArgumentException("Invalid uri: " + uri);

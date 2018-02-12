@@ -46,22 +46,17 @@ public class SectorRepository {
     }
 
     public void updateSector(Sector sector, SectorCallback callback) {
-        if (sectorDao.update(sector) != 0)
+        if (sectorDao.update(sector) != -1)
             callback.onSuccess();
         else
             callback.onError(new Throwable());
     }
 
     public void deleteSector(Sector sector, SectorCallback callback) {
-        int result = sectorDao.delete(sector);
-        if (result != 0)
+        if (sectorDao.delete(sector) > 0)
             callback.onSuccess();
         else
-            callback.onError(new Throwable());
-    }
-
-    public boolean exists(Sector sector) {
-        return sectorDao.exists(sector);
+            callback.onError(new Throwable("No se pudo eliminar. Pruebe a eliminar los productos de ese sector."));
     }
 
     public Sector search(int id) {

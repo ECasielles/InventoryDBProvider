@@ -26,8 +26,10 @@ import java.util.ArrayList;
 public class SectorAdapter extends RecyclerView.Adapter<SectorAdapter.SectorViewHolder> {
 
     private ArrayList<Sector> sectors = new ArrayList<>();
+    private final OnItemActionListener listener;
 
-    public SectorAdapter() {
+    public SectorAdapter(OnItemActionListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -43,6 +45,7 @@ public class SectorAdapter extends RecyclerView.Adapter<SectorAdapter.SectorView
         sectorViewHolder.swtEnabled.setChecked(sectors.get(position).isEnabled());
         sectorViewHolder.swtEnabled.setTag(sectors.get(position));
         sectorViewHolder.txvName.setText(sectors.get(position).getShortname());
+        sectorViewHolder.bind(sectors.get(position), listener);
 
         if (sectors.get(position).isDefault())
             sectorViewHolder.txvSectorDefault.setText(R.string.txvSectorDefault);
@@ -55,14 +58,17 @@ public class SectorAdapter extends RecyclerView.Adapter<SectorAdapter.SectorView
 
     public void clear() {
         sectors.clear();
+        notifyDataSetChanged();
     }
 
     public void addAll(ArrayList<Sector> newSectors) {
-        if (newSectors != null)
+        if (newSectors != null) {
             this.sectors.addAll(newSectors);
+            notifyDataSetChanged();
+        }
     }
 
-    public static class SectorViewHolder extends RecyclerView.ViewHolder {
+    public class SectorViewHolder extends RecyclerView.ViewHolder {
         private Switch swtEnabled;
         private TextView txvName, txvSectorDefault;
 
@@ -73,6 +79,21 @@ public class SectorAdapter extends RecyclerView.Adapter<SectorAdapter.SectorView
             txvSectorDefault = itemView.findViewById(R.id.txvSectorDefault);
         }
 
+        public void bind(Sector sector, OnItemActionListener listener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(sector);
+                }
+            });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    listener.onItemLongClick(sector);
+                    return true;
+                }
+            });
+        }
     }
 
 }

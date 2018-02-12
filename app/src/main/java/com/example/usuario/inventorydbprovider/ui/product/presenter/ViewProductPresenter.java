@@ -27,7 +27,6 @@ public class ViewProductPresenter implements ViewProductContract.Presenter,
         interactor.updateProduct(product);
     }
 
-
     @Override
     public void onProductLoaded() {
         view.productLoaded();
@@ -37,4 +36,5 @@ public class ViewProductPresenter implements ViewProductContract.Presenter,
     public void onProductLoadError(Throwable throwable) {
         view.onLoadError(throwable);
     }
+
 }

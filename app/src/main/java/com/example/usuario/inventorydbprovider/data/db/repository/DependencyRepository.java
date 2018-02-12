@@ -54,7 +54,7 @@ public class DependencyRepository {
 
     public void updateDependency(Dependency dependency, DependencyCallback callback) {
         int result = dependencyDao.update(dependency);
-        if (result == 0) {
+        if (result == -1) {
             //ATENCION: Hemos cambiado el Error por Throwable para generalizar
             //lo va a capturar la vista
             callback.onError(new Throwable());
@@ -64,7 +64,7 @@ public class DependencyRepository {
 
     public void deleteDependency(Dependency dependency, DependencyCallback callback) {
         int result = dependencyDao.delete(dependency);
-        if (result == 0)
+        if (result == -1)
             callback.onError(new Throwable());
         else
             callback.onSuccess();

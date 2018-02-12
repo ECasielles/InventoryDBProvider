@@ -18,7 +18,7 @@ import com.example.usuario.inventorydbprovider.ui.product.fragment.ViewProductFr
  * @see AppCompatActivity
  */
 public class ProductActivity extends AppCompatActivity implements ListProductFragment.OnProductSelectedListener,
-    ViewProductFragment.OnProductLoadListener {
+        ViewProductFragment.OnProductLoadListener {
 
     ViewProductFragment viewProductFragment;
     ListProductFragment listProductFragment;
@@ -48,9 +48,7 @@ public class ProductActivity extends AppCompatActivity implements ListProductFra
     public void viewProduct(Bundle bundle) {
         viewProductFragment = (ViewProductFragment) getSupportFragmentManager().findFragmentByTag(ViewProductFragment.TAG);
         if (viewProductFragment == null) {
-            viewProductFragment = new ViewProductFragment();
-            if (bundle != null)
-                viewProductFragment.setArguments(bundle);
+            viewProductFragment = ViewProductFragment.getNewInstance(bundle);
             getSupportFragmentManager()
                     .beginTransaction()
                     .addToBackStack(null)

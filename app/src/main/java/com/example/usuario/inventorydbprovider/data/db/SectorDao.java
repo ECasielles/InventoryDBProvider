@@ -14,7 +14,6 @@ public interface SectorDao {
     ArrayList<Sector> loadAll();
     long add(Sector sector);
     int delete(Sector sector);
-    boolean exists(Sector sector);
     int update(Sector sector);
     ContentValues createContent(Sector sector);
     Sector search(int id);

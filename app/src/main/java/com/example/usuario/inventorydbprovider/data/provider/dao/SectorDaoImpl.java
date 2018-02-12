@@ -27,8 +27,8 @@ public class SectorDaoImpl implements SectorDao {
         // no merece la pena mantenerlo como constante
         String[] projection = new String[] {
                 InventoryProviderContract.Sector._ID,
-                InventoryProviderContract.Sector.NAME,
                 InventoryProviderContract.Sector.DEPENDENCYID,
+                InventoryProviderContract.Sector.NAME,
                 InventoryProviderContract.Sector.SHORTNAME,
                 InventoryProviderContract.Sector.DESCRIPTION,
                 InventoryProviderContract.Sector.IMAGENAME
@@ -80,46 +80,17 @@ public class SectorDaoImpl implements SectorDao {
     @Override
     public int delete(Sector sector) {
         ContentResolver resolver = InventoryApplication.getContext().getContentResolver();
-        String selection = InventoryProviderContract.Sector._ID + " = ? ";
+        String where =
+                InventoryProviderContract.Sector._ID + " = ? AND " +
+                InventoryProviderContract.Sector.CONTENT_PATH + "." +
+                InventoryProviderContract.Sector.DEPENDENCYID + " NOT IN (SELECT " +
+                InventoryProviderContract.Dependency.CONTENT_PATH + "." +
+                InventoryProviderContract.Dependency._ID + " FROM " +
+                InventoryProviderContract.Dependency.CONTENT_PATH + ")"
+                ;
         String[] selectionArgs = new String[]{String.valueOf(sector.getID())};
         Uri uri = InventoryProviderContract.Sector.CONTENT_URI;
-        return resolver.delete(uri, selection, selectionArgs);
-    }
-
-    @Override
-    public boolean exists(Sector sector) {
-        Sector tempSector = null;
-
-        String[] projection = new String[] {
-                InventoryProviderContract.Sector._ID,
-                InventoryProviderContract.Sector.NAME,
-                InventoryProviderContract.Sector.DEPENDENCYID,
-                InventoryProviderContract.Sector.SHORTNAME,
-                InventoryProviderContract.Sector.DESCRIPTION,
-                InventoryProviderContract.Sector.IMAGENAME
-        };
-        String selection = InventoryProviderContract.Sector.NAME + " = ? ";
-        String[] selectionArgs = new String[]{sector.getName()};
-
-        ContentResolver resolver = InventoryApplication.getContext().getContentResolver();
-        Cursor cursor = resolver.query(InventoryProviderContract.Sector.CONTENT_URI,
-                projection, selection, selectionArgs, null);
-
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                tempSector = new Sector(
-                        cursor.getInt(0),
-                        cursor.getInt(1),
-                        cursor.getString(2),
-                        cursor.getString(3),
-                        cursor.getString(4),
-                        cursor.getString(5),
-                        false,
-                        false
-                );
-            } while (cursor.moveToNext());
-        }
-        return tempSector != null;
+        return resolver.delete(uri, where, selectionArgs);
     }
 
     @Override
@@ -128,8 +99,8 @@ public class SectorDaoImpl implements SectorDao {
 
         String[] projection = new String[] {
                 InventoryProviderContract.Sector._ID,
-                InventoryProviderContract.Sector.NAME,
                 InventoryProviderContract.Sector.DEPENDENCYID,
+                InventoryProviderContract.Sector.NAME,
                 InventoryProviderContract.Sector.SHORTNAME,
                 InventoryProviderContract.Sector.DESCRIPTION,
                 InventoryProviderContract.Sector.IMAGENAME

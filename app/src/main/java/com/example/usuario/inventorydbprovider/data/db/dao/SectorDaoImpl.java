@@ -64,11 +64,6 @@ public class SectorDaoImpl implements SectorDao {
         return 0;
     }
 
-    @Override
-    public boolean exists(Sector sector) {
-        return false;
-    }
-
     public int update(Sector sector) {
         SQLiteDatabase sqLiteDatabase = InventoryOpenHelper.getInstance().openDatabase();
         String[] whereArgs = new String[]{"" + sector.getID()};

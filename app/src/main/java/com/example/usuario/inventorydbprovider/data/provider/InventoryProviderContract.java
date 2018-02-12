@@ -46,10 +46,13 @@ public final class InventoryProviderContract {
                 BaseColumns._ID, DEPENDENCYID, NAME, SHORTNAME, DESCRIPTION, IMAGENAME
         };
     }
-    public static class ProductViewEntry implements BaseColumns {
+    public static class Product implements BaseColumns {
         public static final String CONTENT_PATH = "product";
         public static final Uri CONTENT_URI = Uri.withAppendedPath(
                 InventoryProviderContract.AUTHORITY_URI, CONTENT_PATH);
+        public static final String CONTENT_PATH_VIEW = "productview";
+        public static final Uri CONTENT_URI_VIEW = Uri.withAppendedPath(
+                InventoryProviderContract.AUTHORITY_URI, CONTENT_PATH_VIEW);
         public static final String SERIAL = "serial";
         public static final String MODELCODE = "modelCode";
         public static final String SHORTNAME = "shortname";

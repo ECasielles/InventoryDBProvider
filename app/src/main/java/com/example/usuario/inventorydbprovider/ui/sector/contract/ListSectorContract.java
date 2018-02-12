@@ -13,10 +13,15 @@ public interface ListSectorContract {
     interface View {
         void setPresenter(ListSectorContract.Presenter presenter);
         void showSectors(ArrayList<Sector> sectors);
+
+        void onDatabaseError(Throwable throwable);
+        void onSectorDeleted();
+
     }
 
     interface Presenter {
         void loadSectors();
+        void deleteSector(Sector sector);
     }
 
 }
